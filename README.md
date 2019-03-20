@@ -39,7 +39,7 @@ $ npm run dev
 ## Developers
 ### Build executable apps for mac/win/linux
 ```bash
-# Executables are saved in ./builds
+# executables are saved in ./builds
 $ npm run package-mac
 $ npm run package-win
 $ npm run package-linux
