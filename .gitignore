@@ -1,0 +1,7 @@
+builds/
+node_modules/
+
+*.DS_Store
+
+datastore/datafile.json
+src/styles/css/main.css

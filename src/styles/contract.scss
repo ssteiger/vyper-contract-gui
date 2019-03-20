@@ -1,0 +1,65 @@
+#contract {
+  ol {
+    padding:0;
+  }
+  #constructor,
+  #events,
+  #functions {
+    padding:10px;
+    background-color:$background2;
+  }
+
+  #constructor,
+  #functions {
+    form.parameters {
+      margin-top:10px;
+      margin-bottom:10px;
+      .form-group {
+        margin-bottom:5px;
+        input {
+          margin-top:2px;
+          margin-bottom:10px;
+        }
+      }
+    }
+  }
+
+  #constructor {
+    margin-bottom:15px;
+    .content {
+      padding:10px;
+      background-color:$background1;
+    }
+  }
+
+  #events {
+    li.event {
+      padding:10px;
+      margin-bottom:5px;
+      list-style-type:none;
+      background-color:$background1;
+      border-radius:5px;
+    }
+    li.event:last-of-type {
+      margin-bottom:0;
+    }
+  }
+
+  #functions {
+    li.function {
+      padding:10px;
+      margin-bottom:15px;
+      list-style-type:none;
+      background-color:$background1;
+      border-radius:5px;
+      .result {
+        width:100%;
+        overflow-x:scroll;
+        color:$teal;
+      }
+    }
+    li.function:last-of-type {
+      margin-bottom:0;
+    }
+  }
+}

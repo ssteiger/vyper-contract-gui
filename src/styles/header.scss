@@ -1,0 +1,27 @@
+#header {
+  position:fixed;
+  z-index:100;
+  width:calc(100% - 200px - 30px);
+  padding:15px 0;
+  background-color:$background1;
+
+  .file-name {
+    float:left;
+    font-size:19px;
+    color:$primary;
+  }
+  #accounts {
+    float:right;
+    margin-top:7px;
+    margin-right:15px;
+    font-size:15px;
+    cursor:pointer;
+  }
+  .btn-group {
+    float:right;
+  }
+  #removeFile.dropdown-item {
+    font-size:15px;
+    color:$danger;
+  }
+}

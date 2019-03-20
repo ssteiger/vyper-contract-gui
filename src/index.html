@@ -1,0 +1,203 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Vyper Electron GUI</title>
+  <!-- styles -->
+  <link rel="stylesheet" href="styles/css/main.css">
+  <!-- make jquery accessible as usual via $ -->
+  <script>
+    // https://stackoverflow.com/a/32621989
+    window.$ = window.jQuery = require('./js/assets/jquery-3.3.1.min.js');
+    require('electron-connect').client.create();
+  </script>
+  <!-- dev helpers -->
+  <!-- TODO: remove this in live build -->
+  <script src="js/dev-helpers.js"></script>
+  <!-- app -->
+  <script src="js/assets/web3.min.js"></script>
+  <script src="js/assets/bootstrap.bundle.min.js"></script>
+
+  <script src="js/toastr.js"></script>
+  <script src="js/datastore.js"></script>
+
+  <script src="js/functions/settings.js"></script>
+  <script src="js/init-web3.js"></script>
+  <script src="js/functions/helpers.js"></script>
+  <script src="js/functions/deploy-contract.js"></script>
+  <script src="js/functions/contract-function-call.js"></script>
+  <script src="js/functions/vyper-files.js"></script>
+
+  <script src="js/functions/file-list.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/functions/header.js"></script>
+  <script src="js/main-view.js"></script>
+  <script src="js/functions/abi-form-generator.js"></script>
+</head>
+
+<body>
+  <div id="sidebar">
+    <div id="fixedContent">
+      <img id="logo" src="./static/vyper-logo-transparent.svg">
+      <button id="showFileUpload" class="btn btn-outline-primary btn-block">+ add file</button>
+      <div id="fileDropArea" style="display:none;">
+        <form action="/file-upload" class="clickable">
+          <div class="message">place .vy file here</div>
+        </form>
+      </div>
+      <div id="search" class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">search:</span>
+        </div>
+        <input id="searchInput" type="text" class="form-control" placeholder="file name">
+      </div>
+      <ol id="fileList">
+        <li class="file template" style="display:none;">
+          <div class="file-name"></div>
+        </li>
+      </ol>
+    </div>
+
+    <div id="footer">
+      <button id="toggleSettings" class="btn btn-outline-primary btn-block">settings</button>
+    </div>
+  </div>
+
+  <div id="main" class="container-fluid">
+
+    <div id="settings">
+      <h1>Settings</h1>
+      <hr>
+      <form>
+        <div class="form-group">
+          <label>RPC Server</label>
+          <input name="rpc_url" type="text" class="form-control" placeholder="http://127.0.0.1:7545">
+          <small class="form-text text-muted">The Ethereum network to connect to.</small>
+        </div>
+        <div class="form-group">
+          <label>Compiler URL</label>
+          <input name="compiler_url" type="text" class="form-control" placeholder="http://127.0.0.1:8000/compile">
+          <small class="form-text text-muted">The endpoint where vyper files get sent to, to be compiled.</small>
+        </div>
+      </form>
+      <button class="save btn btn-sm btn-outline-primary">save</button>
+      <div class="form-group float-right">
+        <button id="clearDb" class="save btn btn-sm btn-outline-danger">clear datastore</button>
+        <small class="form-text text-muted">(only vyper files)</small>
+      </div>
+    </div>
+
+    <div id="header">
+      <div class="file-name"></div>
+      <div class="btn-group">
+        <button id="reloadFile" class="btn btn-sm btn-outline-primary">reload file</button>
+        <button class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <div class="dropdown-menu">
+          <a id="removeFile" class="dropdown-item" href="#">remove file</a>
+          <!--
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Separated link</a>
+          -->
+        </div>
+      </div>
+      <div id="accounts"></div>
+    </div>
+
+    <div id="fileInfo" class="row">
+      <div class="col-12">
+        <span class="path"></span>
+        <!--
+        <div>
+          added on:
+          <span class="added-on"></span>
+        </div>
+        -->
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div id="deployedContracts" class="col-xs">
+          <div class="title">interact with contract at</div>
+          <div class="input-group contract-address">
+            <input type="text" class="selected form-control" value="0x..." readonly="readonly">
+            <div class="btn-group input-group-append">
+              <button class="btn btn-sm btn-outline-danger remove main" style="display:none;">remove</button>
+              <button class="btn btn-outline-success copy">copy</button>
+            </div>
+          </div>
+          <ul class="body" style="display:none;">
+            <li class="input-group contract-address template" style="display:none;">
+              <input type="text" class="form-control" value="" readonly="readonly">
+              <div class="btn-group input-group-append">
+                <button class="btn btn-sm btn-outline-danger remove" style="display:none;">remove</button>
+                <button class="btn btn-outline-success copy">copy</button>
+              </div>
+            </li>
+            <button id="editDeployedContracts" class="btn btn-sm btn-outline-primary btn-block">edit</button>
+          </ul>
+        </div>
+        <div id="contract">
+          <div class="title">constructor</div>
+          <div id="constructor" class="col-xs">
+            <div class="content">
+              <div class="name"></div>
+              <form class="parameters" style="display:none;">
+                <div class="form-group template" style="display:none;">
+                  <small class="form-text text-muted"></small>
+                  <input type="text" class="form-control">
+                </div>
+              </form>
+              <button id="deploy" class="btn btn-sm btn-outline-primary btn-block">deploy</button>
+            </div>
+          </div>
+          <div id="fallback" class="col-xs">
+            <div class="template" style="display:none;"></div>
+          </div>
+          <div class="title">events</div>
+          <ol id="events" class="col-xs">
+            <li class="event template" style="display:none;"></li>
+          </ol>
+          <div class="title">functions</div>
+          <ol id="functions" class="col-xs">
+            <li class="function template" style="display:none;">
+              <div class="visibility"></div>
+              <div class="constant"></div>
+              <div class="payable"></div>
+              <div class="name"></div>
+              <form class="parameters">
+                <div class="form-group template" style="display:none;">
+                  <small class="form-text text-muted"></small>
+                  <input type="text" class="form-control">
+                </div>
+                <button class="call btn btn-sm btn-outline-primary btn-block">call</button>
+              </form>
+              <small class="form-text gas"></small>
+              <div class="result"></div>
+            </li>
+          </ol>
+        </div>
+      </div>
+      <div id="compiledFormats" class="col-md-6">
+        <div class="row">
+          <!--
+          <div class="col-12 col-md-6 compiled-format template" style="display:none;">
+            <div class="title"></div>
+            <textarea class="form-control" onclick="this.select()"></textarea>
+          </div>
+          -->
+          <div class="col-12 compiled-format template" style="display:none;">
+            <div class="title"></div>
+            <textarea class="form-control" onclick="this.select();" onkeypress="return false;"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>

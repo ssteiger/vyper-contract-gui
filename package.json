@@ -1,0 +1,34 @@
+{
+  "name": "vyper-electron-gui",
+  "version": "0.1.0",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "gulp && npm run electron",
+    "watch-scss": "node-sass --watch src/styles -o src/styles",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=builds",
+    "package-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Vyper Electron GUI\"",
+    "package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=builds"
+  },
+  "standard": {
+    "ignore": []
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "electron-compile": "^6.4.4",
+    "electron-connect": "^0.6.3",
+    "electron-drag-drop": "^1.1.0",
+    "future": "^2.3.1",
+    "nedb": "^1.8.0",
+    "popper.js": "^1.14.7",
+    "toastr": "^2.1.4"
+  },
+  "devDependencies": {
+    "csscomb": "^4.2.0",
+    "electron": "^4.0.8",
+    "electron-compilers": "^5.9.0",
+    "electron-packager": "^13.1.0",
+    "gulp": "^4.0.0",
+    "gulp-sass": "^4.0.2",
+    "node-sass": "^4.11.0"
+  }
+}

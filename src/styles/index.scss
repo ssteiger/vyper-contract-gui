@@ -1,0 +1,25 @@
+body {
+  font:600 15px 'Open Sans', sans-serif;
+  font-weight:200;
+  background-color:$background1 !important;
+}
+
+#sidebar {
+  position:absolute;
+  width:200px;
+  height:100%;
+  overflow:hidden;
+}
+
+#main {
+  position:absolute;
+  width:calc(100% - 200px);
+  height:100%;
+  margin-left:200px;
+  overflow-x:hidden;
+  overflow-y:auto;
+
+  .title {
+    font-weight:bold;
+  }
+}

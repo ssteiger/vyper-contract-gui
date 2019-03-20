@@ -1,0 +1,38 @@
+#main {
+  #fileInfo {
+    margin-top:66px;
+    margin-bottom:25px;
+    font-size:14px;
+    color:$font3;
+  }
+  #deployedContracts {
+    margin-bottom:15px;
+    .selected {
+      //border-color:$primary;
+      margin-bottom:-1px;
+      color:$primary;
+      cursor:pointer;
+      background-color:$background1;
+    }
+    ul.body {
+      padding-left:0;
+      margin-bottom:0;
+      li.contract-address {
+        margin-bottom:-1px;
+        list-style-type:none;
+        input {
+          cursor:pointer;
+          background-color:$background1;
+        }
+        input:hover {
+          color:$font2;
+          background-color:$primary;
+          transition:color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+      }
+      button#editDeployedContracts {
+        margin-top:10px;
+      }
+    }
+  }
+}
