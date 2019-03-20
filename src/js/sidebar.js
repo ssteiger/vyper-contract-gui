@@ -39,7 +39,6 @@ function initSidebar () {
 }
 
 function addFileToSidebar (file) {
-  console.log('running addFileToSidebar()')
   let fileName = file.path.split('/').pop()
   // let onlyFilePath = file.path.replace(fileName, '')
   // create view
