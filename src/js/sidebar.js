@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   initSidebar()
-  // add events
+  // bind events
   // select file from sidebar
   $('#sidebar').on('click', '.file', function (e) {
     let fileId = $(this).find('.file-name').attr('data-id')
@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // $('#main').animate({scrollTop: 0})
     $('#main').scrollTop(0)
   })
-  // bind events
   $('#sidebar').on('click', '#showFileUpload', function (e) {
     $('#fileDropArea').slideToggle(function () {
       setFileListHeight()
