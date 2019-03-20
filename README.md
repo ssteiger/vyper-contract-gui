@@ -46,9 +46,9 @@ $ npm run package-linux
 ```
 
 ### Generate icons
-mac (icns): [link](https://itunes.apple.com/de/app/image2icon-make-your-icons/id992115977?l=en&mt=12)
-win (.icns -> .ico): [link](https://convertico.com/)
-png: [link](https://convertico.com/ico-to-png/)
+- mac (icns): [link](https://itunes.apple.com/de/app/image2icon-make-your-icons/id992115977?l=en&mt=12)
+- win (.icns -> .ico): [link](https://convertico.com/)
+- png: [link](https://convertico.com/ico-to-png/)
 
 ### Run project formatters
 ```bash
