@@ -80,18 +80,22 @@ async function saveVyperFile (filePath) {
   // check if file exists
   Files.findOne({ path: filePath }, function (err, doc) {
     if (doc) {
-      // TODO: this is not working, maybe update main view
+      console.log('updating db entry for vyper file:')
+      console.log(doc)
       // update datastore entry
-      console.log('updating db entry for vyper file')
-      Files.update({ _id: file._id }, file)
+      Files.update({ _id: doc._id }, file, function (err) {
+        // update view
+        updateMainView(doc._id)
+      })
     } else {
       // add file to datastore
-      Files.insert(file, function (err, entry) {
-        console.log('adding to datastore:')
-        console.log(entry)
+      Files.insert(file, function (err, doc) {
+        console.log('adding file entry to datastore:')
+        console.log(doc)
         if (!err) {
           // update view
-          addFileToSidebar(entry)
+          addFileToSidebar(doc)
+          updateMainView(doc._id)
         } else {
           console.err(err)
         }

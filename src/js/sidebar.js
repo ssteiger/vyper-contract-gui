@@ -73,13 +73,14 @@ function setFileListHeight () {
     let fileDropArea = $('#fileDropArea').height()
     combinedHeight += fileDropArea
   }
+  /*
   console.log('sidebarHeight:')
   console.log(sidebar)
   console.log('combinedHeight:')
   console.log(combinedHeight)
+  */
   // set height
   $('#fileList').height(sidebar - combinedHeight)
-  console.log('set #fileList height')
-  console.log(sidebar - combinedHeight)
-  console.log()
+  //console.log('set #fileList height')
+  //console.log(sidebar - combinedHeight)
 }

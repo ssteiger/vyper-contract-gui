@@ -18,7 +18,6 @@ function updateHeaderView (file) {
   })
   // add events
   $('#reloadFile').unbind().on('click', function () {
-    removeFileFromSidebar(file)
     saveVyperFile(file.path)
   })
   $('#removeFile').unbind().on('click', function () {
