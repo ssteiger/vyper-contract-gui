@@ -1,6 +1,6 @@
 # Vyper contract GUI
 
-An [electron](https://electronjs.org/) app with a nice and easy UI, for compiling and interacting with smart contracts written in [vyper](https://github.com/ethereum/vyper).
+A simple [electron](https://electronjs.org/) app for compiling and interacting with smart contracts written in [vyper](https://github.com/ethereum/vyper).
 
 ![Screenshot01](./assets/screenshots/01.png?raw=true "Screenshot01")
 
