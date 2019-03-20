@@ -10,6 +10,9 @@ Initialize submodules ([vyper](https://github.com/ethereum/vyper))
 # clone repository
 $ git clone
 
+# enter project folder
+$ cd vyper-electron-gui
+
 # install submodules
 $ git submodule init
 $ git submodule update
@@ -27,9 +30,6 @@ $ sh ./start-vyper-server.sh
 
 ### 2. Terminal:
 ```bash
-# enter project folder
-$ cd vyper-electron-gui
-
 # install dependencies
 $ npm install
 
