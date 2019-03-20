@@ -19,15 +19,14 @@ $ git submodule update
 Open two terminals:
 
 ### 1. Terminal:
-Start the local vyper server (for compiling .vy contracts)
 ```bash
+# start local vyper server (for compiling .vy contracts)
 $ sh ./start-vyper-server.sh
 ```
 
 ### 2. Terminal:
-Start the app
 ```bash
-# go to project folder
+# enter project folder
 $ cd vyper-electron-gui
 
 # install dependencies
