@@ -14,6 +14,7 @@ $ git clone
 $ git submodule init
 $ git submodule update
 ```
+Note: Prerequisite is a working installation of [vyper](https://vyper.readthedocs.io/en/latest/installing-vyper.html)
 
 ## Getting started
 Open two terminals:
