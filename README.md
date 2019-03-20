@@ -36,6 +36,11 @@ $ npm install
 $ npm run dev
 ```
 
+## Screenshots
+![Screenshot02](./assets/screenshots/02.png?raw=true "Screenshot02")
+![Screenshot03](./assets/screenshots/03.png?raw=true "Screenshot03")
+![Screenshot04](./assets/screenshots/04.png?raw=true "Screenshot04")
+
 ## Developers
 ### Build executable apps for mac/win/linux
 ```bash
@@ -54,7 +59,6 @@ $ npm run package-linux
 ```bash
 # javascript
 $ standard
-
 # scss
 $ csscomb src/styles/
 ```
@@ -63,11 +67,6 @@ $ csscomb src/styles/
 ```bash
 $ export ELECTRON_ENABLE_LOGGING=true
 ```
-
-## Screenshots
-![Screenshot02](./assets/screenshots/02.png?raw=true "Screenshot02")
-![Screenshot03](./assets/screenshots/03.png?raw=true "Screenshot03")
-![Screenshot04](./assets/screenshots/04.png?raw=true "Screenshot04")
 
 ## TODO's
 * [ ] add [event logging](https://github.com/plasma-group/watch-eth)
