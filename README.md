@@ -16,6 +16,9 @@ $ cd vyper-electron-gui
 # install submodules
 $ git submodule init
 $ git submodule update
+
+# install dependencies
+$ npm install
 ```
 Note: Prerequisite is a working installation of [vyper](https://vyper.readthedocs.io/en/latest/installing-vyper.html)
 
@@ -30,9 +33,6 @@ $ sh ./start-vyper-server.sh
 
 ### 2. Terminal:
 ```bash
-# install dependencies
-$ npm install
-
 # start app
 $ npm run dev
 ```
