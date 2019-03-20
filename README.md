@@ -60,6 +60,7 @@ $ npm run package-linux
 ```bash
 # javascript
 $ standard
+
 # scss
 $ csscomb src/styles/
 ```
