@@ -24,6 +24,7 @@ async function compileVyperFile (file) {
       // send request
       let result = request.send(JSON.stringify({ 'code': file.content }))
       request.onerror = function (e) {
+        console.log(e)
         toastr.error('XMLHttpRequest error: Are your RPC/Compiler connections healthy?')
       }
     })

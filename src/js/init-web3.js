@@ -3,13 +3,20 @@ import Web3 from 'web3'
 
 var provider, web3
 
-function setWeb3Provider (httpProvider) {
+async function setWeb3Provider (httpProvider) {
   if (httpProvider == '') {
     let ganache = 'http://localhost:7545'
     httpProvider = ganache
   }
-  provider = new Web3.providers.HttpProvider(httpProvider)
-  web3 = new Web3(provider)
+
+  try {
+    web3 = new Web3()
+    provider = new Web3.providers.HttpProvider(httpProvider)
+    web3.setProvider(provider)
+  } catch (e) {
+    console.log(e)
+    toastr.error(e)
+  }
 
   console.log('new provider set')
   console.log('coinbase: ' + web3.eth.coinbase)
