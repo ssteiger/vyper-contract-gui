@@ -20,7 +20,7 @@ $ git submodule update
 # install dependencies
 $ npm install
 ```
-Note: Prerequisite is a working installation of [vyper](https://vyper.readthedocs.io/en/latest/installing-vyper.html)
+Note: Prerequisite is a working [installation of vyper](https://vyper.readthedocs.io/en/latest/installing-vyper.html)
 
 ## Getting started
 Open two terminals:
