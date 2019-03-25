@@ -9,14 +9,21 @@ async function setWeb3Provider (httpProvider) {
     httpProvider = ganache
   }
 
-  try {
-    web3 = new Web3()
-    provider = new Web3.providers.HttpProvider(httpProvider)
-    web3.setProvider(provider)
-  } catch (e) {
-    console.log(e)
-    toastr.error(e)
-  }
+  web3 = new Web3()
+  provider = new Web3.providers.HttpProvider(httpProvider)
+
+  // TODO:
+  //      Uncaught (in promise) Error: CONNECTION ERROR: Couldn't connect to
+  //      node http://127.0.0.1:7545.",
+  //      source: Vyper-contract-GUI/src/js/assets/web3.min.js
+  web3.setProvider(provider, function(err, res) {
+    if (err) {
+      console.log(err)
+      toastr.error(err)
+    } else {
+      console.log(res)
+    }
+  })
 
   console.log('new provider set')
   console.log('coinbase: ' + web3.eth.coinbase)

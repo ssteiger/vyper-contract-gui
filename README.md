@@ -2,6 +2,9 @@
 
 A simple [electron](https://electronjs.org/) app for compiling and interacting with smart contracts written in [vyper](https://github.com/ethereum/vyper).
 
+**Attention!!: Currently this app crashes when you attempt to save the settings and the selected RPC Server endpoint is unavailable.
+-> Make sure your RPC Server is running ([Ganache](https://truffleframework.com/ganache) is highly recommended) before you save your settings.**
+
 ![Screenshot01](./assets/screenshots/01.png?raw=true "Screenshot01")
 
 ## Installation

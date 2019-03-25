@@ -13,13 +13,13 @@
     "ignore": []
   },
   "dependencies": {
-    "cryptiles": ">=4.1.2",
-    "hoek": ">=4.2.1",
     "bootstrap": "^4.3.1",
+    "cryptiles": ">=4.1.2",
     "electron-compile": "^6.4.4",
     "electron-connect": "^0.6.3",
     "electron-drag-drop": "^1.1.0",
     "future": "^2.3.1",
+    "hoek": ">=4.2.1",
     "nedb": "^1.8.0",
     "popper.js": "^1.14.7",
     "toastr": "^2.1.4"
