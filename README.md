@@ -1,6 +1,6 @@
 # Vyper contract GUI
 
-A simple [electron](https://electronjs.org/) app for compiling and interacting with smart contracts written in [vyper](https://github.com/ethereum/vyper).
+A simple [electron](https://electronjs.org/) app for compiling and interacting with your [Vyper](https://github.com/ethereum/vyper) code.
 
 **Attention!!: Currently this app crashes when you attempt to save the settings and the selected RPC Server endpoint is unavailable.**
 
