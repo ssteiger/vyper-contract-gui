@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react'
-import { Form, InputNumber, Tooltip, Button, AutoComplete, Typography, } from 'antd'
+import { Form, InputNumber, Button, Typography, } from 'antd'
 
 // TODO:
 // type Props = {}
@@ -9,21 +9,22 @@ export default class SendEther extends Component<Props> {
 
   handleSubmit = (e)  => {
     e.preventDefault()
-    let inputFields = $(e.target).find('input')
+    const { web3, file, sendEther } = this.props
+    const inputFields = $(e.target).find('input')
 
     let inputs = {}
-    inputFields.each(function (index, item) {
+    inputFields.each((index, item) => {
       inputs[item.name] = item.value
     })
-    inputs.file = this.props.file
-    inputs.account = this.props.web3.selectedAccount
-    console.log(inputs)
-    this.props.sendEther(inputs)
+    inputs.file = file
+    inputs.account = web3.selectedAccount
+
+    sendEther(inputs)
   }
 
   render() {
     const { Text } = Typography
-    const handleSubmit = this.handleSubmit
+    const { handleSubmit } = this
 
     return (
       <React.Fragment>

@@ -3,7 +3,7 @@ import {
   FILES_FETCH_ALL,
   FILES_SHOW_ALL,
   FILES_UPLOAD,
-  FILES_COMPILE,
+  //FILES_COMPILE,
   FILES_RECOMPILE,
   FILES_SAVE,
   FILES_UPDATE,
@@ -21,11 +21,6 @@ const filesShowAll = (files: Array<Object>) => ({
 
 const fileUpload = (file: Object) => ({
   type: FILES_UPLOAD,
-  file,
-})
-
-const fileCompile = (file: Object) => ({
-  type: FILES_COMPILE,
   file,
 })
 
@@ -52,7 +47,6 @@ export {
   filesFetchAll,
   filesShowAll,
   fileUpload,
-  fileCompile,
   fileReCompile,
   fileSave,
   fileUpdate,

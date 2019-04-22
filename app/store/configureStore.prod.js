@@ -1,6 +1,5 @@
 // @flow
 import { createStore, applyMiddleware } from 'redux'
-//import thunk from 'redux-thunk'
 import createSagaMiddleware from 'redux-saga'
 // lets you manage the history stack, navigate, confirm navigation, and persist state between sessions.
 import { createHashHistory } from 'history'

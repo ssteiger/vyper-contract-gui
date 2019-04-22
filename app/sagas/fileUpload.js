@@ -6,7 +6,6 @@ import {
   FILES_COMPILE,
   FILES_RECOMPILE,
   FILES_SAVE,
-  FILES_UPDATE,
   FILES_FETCH_ALL,
   SELECTED_FILE_SET,
 } from '../constants/actions'
@@ -25,7 +24,7 @@ import {
 export function* uploadFile(action) {
   try {
     const results = yield call(promiseDbFind, Files, { path: action.file.path })
-    if (results.length == 0) {
+    if (results.length === 0) {
       const file = yield call(uploadVyperFile, action.file)
       yield put({ type: FILES_COMPILE, file })
     } else {

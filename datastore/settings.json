@@ -1,3 +1,3 @@
-{"_id":"accounts","accounts":[{"address":"0xa66479534824EA7b4Ad6746a62495c24cb16f510","privateKey":"0xd64d1d9f72910a5362cfa4dcea618adbaaf0c9e03e1f6ab7abdbd5ef24aae5af"},{"address":"0xdAAc0658304dFA6A783673d511959bcf93F9f86C","privateKey":"0x6ec196e4897971916f015475d18db1c179544fc6c7028ab9c98d06a94b6d4ee8"},{"address":"0x489912C3D6Ef4cFB1451dd3B017B639a40e2361B","privateKey":"0xa59061cd0259d0554491be0634ab0883fabaca9c924a05ad4ac10f867ece45a4"},{"address":"0x6bc84E0DDb05a96d375E8de50c984798532Fa976","privateKey":"0x5e68553b7f46e7a3ae3204656408495b5133bf4aeb66143ff0f1b205ec38351d"}]}
+{"_id":"accounts","accounts":[{"address":"0x954e72fdc51Cf919203067406fB337Ed4bDC8CdA","privateKey":"0xcbf13a21140d00f1c0b91ed20e81ba8817ff814053be4389fad281a90b117d33"}]}
 {"rpcServer":"http://127.0.0.1:7545","compilerUrl":"http://127.0.0.1:8000/compile","_id":"connections"}
 {"rpcServer":"http://127.0.0.1:7545","compilerUrl":"http://127.0.0.1:8000/compile","_id":"connections"}

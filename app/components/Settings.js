@@ -9,17 +9,19 @@ export default class Sidebar extends Component<Props> {
 
   handleEndpointsSubmit = () => (event) =>  {
     event.preventDefault()
+    const { updateSettings } = this.props
     const formInputFields = $(event.target).find('input')
 
     let inputValues = {}
-    formInputFields.each(function (index, item) {
+    formInputFields.each((index, item) => {
       inputValues[item.name] = item.value
     })
-    this.props.updateSettings(inputValues)
+    updateSettings(inputValues)
   }
 
   handleAccountSubmit = () => (event) =>  {
     event.preventDefault()
+    const { importAccount } = this.props
     let formInputFields = $(event.target).find('input')
 
     let inputValues = {}
@@ -31,15 +33,21 @@ export default class Sidebar extends Component<Props> {
       inputValues.privateKey = `0x${inputValues.privateKey}`
     }
 
-    this.props.importAccount(inputValues.privateKey)
+    importAccount(inputValues.privateKey)
   }
 
   render() {
     const { Header, Content, } = Layout
     const { Title } = Typography
-    // TODO: doing this because of using this.props inside a map
-    //       can this be done better?
-    const props = this.props
+
+    const {
+      web3,
+      sidebarWidth,
+      rpcServer,
+      compilerUrl,
+      generateRandomAccount,
+      removeAccount,
+    } = this.props
 
     return (
       <React.Fragment>
@@ -47,7 +55,7 @@ export default class Sidebar extends Component<Props> {
           position:'fixed',
           height:'auto',
           width:'calc(100% - 200px)',
-          paddingLeft:this.props.sidebarWidth,
+          paddingLeft:sidebarWidth,
           padding:'10px 24px',
           background:'#fff',
           borderBottom:'1px solid rgb(232, 232, 232)',
@@ -74,7 +82,7 @@ export default class Sidebar extends Component<Props> {
                 key='input-settings-rpcServer'
                 name='rpcServer'
                 placeholder='http://127.0.0.1:7545'
-                defaultValue={this.props.rpcServer}
+                defaultValue={rpcServer}
                 style={{ width: '100%' }}
               />
             </Form.Item>
@@ -83,7 +91,7 @@ export default class Sidebar extends Component<Props> {
                 key='input-settings-compilerUrl'
                 name='compilerUrl'
                 placeholder='http://127.0.0.1:8000/compile'
-                defaultValue={this.props.compilerUrl}
+                defaultValue={compilerUrl}
                 style={{ width: '100%' }}
               />
             </Form.Item>
@@ -97,9 +105,9 @@ export default class Sidebar extends Component<Props> {
             style={{ backgroundColor:'#fff', marginTop:'100px' }}
           >
           {
-            this.props.web3.accounts.map(function (account, key) {
+            web3.accounts.map((account, key) => {
               return (
-                <List.Item key={'item-'+key} actions={[<a onClick={() => props.removeAccount(account)}>remove</a>]}>
+                <List.Item key={`item-${key}`} actions={[<a onClick={() => {removeAccount(account)}}>remove</a>]}>
                   <List.Item.Meta
                     //avatar={<Avatar src="https://....png" />}
                     title={account.address}
@@ -128,7 +136,7 @@ export default class Sidebar extends Component<Props> {
           <Button
             block
             type='dashed'
-            onClick={() => { this.props.generateRandomAccount() }}
+            onClick={() => { generateRandomAccount() }}
             style={{ marginTop: '10px' }}
           >
             generate random account

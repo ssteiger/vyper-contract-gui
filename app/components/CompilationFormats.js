@@ -10,6 +10,20 @@ export default class CompilationFormats extends Component<Props> {
     const { TextArea } = Input
     const { Text } = Typography
 
+    const {
+      content,
+      abi,
+      method_identifiers,
+      // interface,
+      external_interface,
+      source_map,
+      ir,
+      asm,
+      bytecode,
+      bytecode_runtime,
+    } = this.props
+
+
     const text_area_height = 14
     const style = {
       marginBottom:'10px',
@@ -21,15 +35,15 @@ export default class CompilationFormats extends Component<Props> {
       <div style={{ marginLeft:'12px' }}>
         <Text strong>content</Text>
         <div style={{ ...style }}>
-          <TextArea rows={text_area_height} value={this.props.content} />
+          <TextArea rows={text_area_height} value={content} />
         </div>
         <Text strong>abi</Text>
         <div style={{ ...style }}>
-          <TextArea rows={text_area_height} value={JSON.stringify(this.props.abi)} />
+          <TextArea rows={text_area_height} value={JSON.stringify(abi)} />
         </div>
         <Text strong>method_identifiers</Text>
         <div style={{ ...style }}>
-          <TextArea rows={text_area_height} value={JSON.stringify(this.props.method_identifiers, null, 4)} />
+          <TextArea rows={text_area_height} value={JSON.stringify(method_identifiers, null, 4)} />
         </div>
         <Text strong>interface</Text>
         <div style={{ ...style }}>
@@ -37,27 +51,27 @@ export default class CompilationFormats extends Component<Props> {
         </div>
         <Text strong>external_interface</Text>
         <div style={{ ...style }}>
-          <TextArea rows={text_area_height} value={this.props.external_interface} />
+          <TextArea rows={text_area_height} value={external_interface} />
         </div>
         <Text strong>source_map</Text>
         <div style={{ ...style }}>
-          <TextArea rows={text_area_height} value={JSON.stringify(this.props.source_map)} />
+          <TextArea rows={text_area_height} value={JSON.stringify(source_map)} />
         </div>
         <Text strong>ir</Text>
         <div style={{ ...style }}>
-          <TextArea rows={text_area_height} value={this.props.ir} />
+          <TextArea rows={text_area_height} value={ir} />
         </div>
         <Text strong>asm</Text>
         <div style={{ ...style }}>
-          <TextArea rows={text_area_height} value={this.props.asm} />
+          <TextArea rows={text_area_height} value={asm} />
         </div>
         <Text strong>bytecode</Text>
         <div style={{ ...style }}>
-          <TextArea rows={text_area_height} value={this.props.bytecode} />
+          <TextArea rows={text_area_height} value={bytecode} />
         </div>
         <Text strong>bytecode_runtime</Text>
         <div style={{ ...style }}>
-          <TextArea rows={text_area_height} value={this.props.bytecode_runtime} />
+          <TextArea rows={text_area_height} value={bytecode_runtime} />
         </div>
       </div>
     )

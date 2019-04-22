@@ -19,7 +19,6 @@ import {
   promiseDbUpdate,
 
   getWeb3,
-  compileVyperFile,
 } from '../utils'
 
 export function* initializeSettings(action) {
@@ -118,6 +117,7 @@ export function* removeAccount(action) {
 }
 
 // TODO:
+/*
 export function* resetSettings(action) {
   console.log(action)
   try {
@@ -127,6 +127,7 @@ export function* resetSettings(action) {
     message.error(e.message)
   }
 }
+*/
 
 export function* settingsSaga() {
   yield takeEvery(SETTINGS_INIT, initializeSettings)
@@ -134,5 +135,5 @@ export function* settingsSaga() {
   yield takeEvery(SETTINGS_IMPORT_ACCOUNT, importAccountFromPrivateKey)
   yield takeEvery(SETTINGS_GENERATE_RANDOM_ACCOUNT, generateRandomAccount)
   yield takeEvery(SETTINGS_REMOVE_ACCOUNT, removeAccount)
-  yield takeEvery(SETTINGS_RESET, resetSettings)
+  //yield takeEvery(SETTINGS_RESET, resetSettings)
 }

@@ -9,16 +9,18 @@ import Accounts from '../containers/Accounts'
 export default class MyHeader extends Component<Props> {
 
   onClickMenu = ({key}: Object)  => {
+    const { showSettings, fileReCompile, fileRemove, file } = this.props
     switch (key) {
       case 'settings':
-        this.props.showSettings()
+        showSettings()
         break
       case 'recompile':
-        this.props.fileReCompile(this.props.file)
+        fileReCompile(file)
         break
       case 'delete':
-        this.props.fileRemove(this.props.file)
+        fileRemove(file)
         break
+      default:
     }
   }
 
@@ -26,6 +28,8 @@ export default class MyHeader extends Component<Props> {
     const { Header } = Layout
     const ButtonGroup = Button.Group
     const { Title } = Typography
+
+    const { sidebarWidth, file } = this.props
 
     const menu = (
       <Menu onClick={this.onClickMenu}>
@@ -44,15 +48,13 @@ export default class MyHeader extends Component<Props> {
       </Menu>
     )
 
-    //console.log('Header this.props:')
-    //console.log(this.props)
 
     return (
       <Header style={{
         position:'fixed',
         height:'auto',
         width:'calc(100% - 200px)',
-        paddingLeft:this.props.sidebarWidth,
+        paddingLeft:sidebarWidth,
         padding:'0 24px',
         background:'#fff',
         borderBottom:'1px solid rgb(232, 232, 232)',
@@ -61,8 +63,8 @@ export default class MyHeader extends Component<Props> {
         <Row>
           <div style={{ float: 'left' }}>
             <Row>
-              <Title style={{ marginTop:'20px' }} level={4}>{this.props.file.name}</Title>
-              {/*<Text style={{ lineHeight: 'normal' }}>{this.props.file.path}</Text>*/}
+              <Title style={{ marginTop:'20px' }} level={4}>{file.name}</Title>
+              {/* <Text style={{ lineHeight: 'normal' }}>{file.path}</Text> */}
             </Row>
           </div>
           <div style={{ float: 'right' }}>

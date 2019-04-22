@@ -5,18 +5,19 @@ import { Button, Upload, message, Icon } from 'antd'
 // TODO:
 // type Props = {}
 
-const Dragger = Upload.Dragger
-
-function getBase64(img, callback) {
-  const reader = new FileReader()
-  reader.addEventListener('load', () => callback(reader.result))
-  reader.readAsDataURL(img)
-}
+const { Dragger } = Upload
 
 export default class FileUpload extends Component<Props> {
 
   componentDidMount() {
+    // hide ant-design related file-list
     $('.ant-upload-list').hide()
+  }
+
+  getBase64 = (file, callback) => {
+    const reader = new FileReader()
+    reader.addEventListener('load', () => callback(reader.result))
+    reader.readAsDataURL(file)
   }
 
   handleChange = (info: Object)  => {
@@ -24,12 +25,13 @@ export default class FileUpload extends Component<Props> {
       this.setState({ loading: true })
       return
     }
+    const { fileUpload } = this.props
     if (info.file.status === 'done') {
-      getBase64(info.file.originFileObj, imageUrl => this.setState({ loading: false }))
+      this.getBase64(info.file.originFileObj, filePath => this.setState({ loading: false }))
       if (info.file.name.slice('.vy'.length * -1) !== '.vy') {
         message.error('not a valid vyper file')
       } else {
-        this.props.fileUpload(info.file.originFileObj)
+        fileUpload(info.file.originFileObj)
       }
     }
   }

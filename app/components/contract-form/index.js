@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react'
-import { Form, Input, Tooltip, Button, AutoComplete, } from 'antd'
 
 import Addresses from '../../containers/contract-form/Addresses'
 import Constructor from '../../containers/contract-form/Constructor'

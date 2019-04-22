@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react'
-import { Form, Input, Tooltip, Button, AutoComplete, Typography, } from 'antd'
+import { Form, Input, Button, Typography, } from 'antd'
 
 // TODO:
 // type Props = {}
@@ -8,9 +8,8 @@ import { Form, Input, Tooltip, Button, AutoComplete, Typography, } from 'antd'
 export default class Functions extends Component<Props> {
 
   renderInputs = (inputs) => {
-    let handleChange = this.handleChange
     if (inputs) {
-      return inputs.map(function(input, key) {
+      return inputs.map((input, key) => {
         return (
           <React.Fragment key={`f-f-input-${key}`}>
             {input.name}
@@ -43,7 +42,7 @@ export default class Functions extends Component<Props> {
     }
   }
 
-  createLabel(a) {
+  createLabel = (a) => {
     let label = ''
     if (a.constant) {
       label += '@constant'
@@ -194,26 +193,27 @@ export default class Functions extends Component<Props> {
 
   handleSubmit = (abiFunc) => (event) =>  {
     event.preventDefault()
-    let formInputFields = $(event.target).find('input')
+    const { file, web3, resetFunctionCallResults, callFunction } = this.props
+    const formInputFields = $(event.target).find('input')
 
     let inputValues = {}
     let transactionValue = '0'
-    formInputFields.each(function (index, item) {
-      if (item.name == 'transactionValue_CxH4') {
+    formInputFields.each((index, item) => {
+      if (item.name === 'transactionValue_CxH4') {
         transactionValue = item.value
       } else {
         inputValues[item.name] = item.value
       }
     })
-    //console.log('submit with values:')
-    //console.log(inputValues)
-    this.props.resetFunctionCallResults(abiFunc.name)
-    this.props.callFunction({
-      file: this.props.file,
+    // console.log('submit with values:')
+    // console.log(inputValues)
+    resetFunctionCallResults(abiFunc.name)
+    callFunction({
+      file,
       functionDetails: abiFunc,
       inputs: inputValues,
-      transactionValue: transactionValue,
-      account: this.props.web3.selectedAccount,
+      transactionValue,
+      account: web3.selectedAccount,
     })
   }
   // TODO:
@@ -223,16 +223,16 @@ export default class Functions extends Component<Props> {
 
   render() {
     const { Text } = Typography
-    const { abi } = this.props.file
-    const {renderInputs, renderEthInput, createLabel, handleSubmit} = this
-    const functionCallResults = this.props.functionCallResults
+    const { file: { abi } } = this.props
+    const { renderInputs, renderEthInput, createLabel, handleSubmit } = this
+    const { functionCallResults } = this.props
 
     return (
       <React.Fragment>
         <Text strong>functions</Text>
         {
-          abi.map(function (abiPart, key) {
-            if (abiPart.type == 'function') {
+          abi.map((abiPart, key) => {
+            if (abiPart.type === 'function') {
               return (
                 <Form
                   key={`form-${key}`}

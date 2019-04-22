@@ -1,3 +1,4 @@
+// @flow
 import { getWeb3 } from './web3jsPromises'
 
 // TODO: no errors are caught here

@@ -1,3 +1,4 @@
+// @flow
 import { getWeb3 } from './web3jsPromises'
 
 const BigNumber = require('bignumber.js')
@@ -42,9 +43,9 @@ export default async function executeContractFunction (
   await web3.eth.personal.unlockAccount(web3Account, 'password1234')
   console.log(`web3Account: ${web3Account}`)
 
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     if (functionDetails.inputs.length !== inputs.length) {
-      let message = 'Error: Invalid number of arguments'
+      const message = 'Error: Invalid number of arguments'
       reject(message)
     }
 
@@ -61,12 +62,10 @@ export default async function executeContractFunction (
       if (error) {
         console.error(error)
         reject(error)
+      } else if (result instanceof BigNumber) {
+        resolve(result.toString())
       } else {
-        if (result instanceof BigNumber) {
-          resolve(result.toString())
-        } else {
-          resolve(result)
-        }
+        resolve(result)
       }
     })
   }) // Promise

@@ -1,4 +1,4 @@
-import { call, put, take, takeEvery } from 'redux-saga/effects'
+import { call, put, takeEvery } from 'redux-saga/effects'
 import { message } from 'antd'
 
 import {
@@ -14,25 +14,23 @@ import { Settings } from '../datastore'
 import {
   promiseDbInsert,
   promiseDbFind,
-  promiseDbUpdate,
 
-  getWeb3,
   web3GenerateNewAccounts,
   web3GetAccountBalance,
 } from '../utils'
 
 export function* initWeb3(action) {
   try {
-    const web3 = yield call(getWeb3)
-    let settings = yield call(promiseDbFind, Settings, { _id: 'accounts' })
+    const settings = yield call(promiseDbFind, Settings, { _id: 'accounts' })
     let accounts = []
-    if (!settings[0] || settings[0].accounts.length == 0) {
+    if (!settings[0] || settings[0].accounts.length === 0) {
       let wallets = yield call(web3GenerateNewAccounts)
       for (let i=0; i<wallets.length; i++) {
         delete wallets[i].index
-        accounts.push(wallet[i])
+        accounts.push(wallets[i])
       }
-      yield call(promiseDbInsert, Settings, { _id: 'accounts', accounts: accounts })
+      // TODO: this is not correct, -> insert or update depending on which 'or' in if-condition driggered
+      yield call(promiseDbInsert, Settings, { _id: 'accounts', accounts })
     } else {
       accounts = settings[0].accounts
     }
@@ -40,7 +38,7 @@ export function* initWeb3(action) {
     for (let i=0; i<accounts.length; i++) {
       accounts[i].balance = yield call(web3GetAccountBalance, accounts[i].address)
     }
-    yield put({ type: WEB3_ACCOUNTS_LOAD_ALL, accounts: accounts })
+    yield put({ type: WEB3_ACCOUNTS_LOAD_ALL, accounts })
     yield put({ type: WEB3_ACCOUNTS_SET_MAIN, account: accounts[0] })
   } catch (e) {
     console.log(e)
@@ -50,15 +48,14 @@ export function* initWeb3(action) {
 
 export function* web3AccountsLoadBalances(action) {
   try {
-    const web3 = yield call(getWeb3)
     const settings = yield call(promiseDbFind, Settings, { _id: 'accounts' })
-    let accounts = settings[0].accounts
+    const { accounts } = settings[0]
 
     for (let i=0; i<accounts.length; i++) {
       accounts[i].balance = yield call(web3GetAccountBalance, accounts[i].address)
     }
 
-    yield put({ type: WEB3_ACCOUNTS_LOAD_ALL, accounts: accounts })
+    yield put({ type: WEB3_ACCOUNTS_LOAD_ALL, accounts })
   } catch (e) {
     console.log(e)
     message.error(e.message)

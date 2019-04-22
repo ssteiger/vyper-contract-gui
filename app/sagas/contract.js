@@ -42,7 +42,7 @@ export function* deploy(action) {
     file.deployedAt.addresses.push({address: deployedContract._address, balance: 0})
     file.deployedAt.selected.address = {address: deployedContract._address, balance: 0}
 
-    message.success('deployed contract at ' + deployedContract._address)
+    message.success(`deployed contract at ${deployedContract._address}`)
     yield put({ type: SELECTED_FILE_SET, file })
     yield put({ type: FILES_FETCH_ALL })
   } catch (e) {
@@ -99,7 +99,7 @@ export function* setSelectedAddress(action) {
 }
 
 export function* loadContractBalances(action) {
-  let file = {
+  const file = {
     ...action.file
   }
   try {

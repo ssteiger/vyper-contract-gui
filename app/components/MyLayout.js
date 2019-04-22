@@ -12,12 +12,14 @@ import File from '../containers/File'
 
 export default class MyLayout extends Component<Props> {
   componentWillMount() {
-    this.props.initializeSettings()
-    this.props.initWeb3()
+    const { initializeSettings, initWeb3 } = this.props
+    initializeSettings()
+    initWeb3()
   }
 
   mainView = () => {
-    if (this.props.selectedFile._id && !this.props.settings.show) {
+    const { selectedFile, settings }  = this.props
+    if (selectedFile._id && !settings.show) {
       return (
         <React.Fragment>
           <Header />
@@ -29,11 +31,13 @@ export default class MyLayout extends Component<Props> {
   }
 
   render() {
+    const { sidebarWidth } = this.props
+
     return (
       <Layout style={{ minHeight:'100vh' }}>
         <Sidebar />
         <Layout>
-          <div style={{ marginLeft: this.props.sidebarWidth }}>
+          <div style={{ marginLeft: sidebarWidth }}>
             { this.mainView() }
           </div>
         </Layout>

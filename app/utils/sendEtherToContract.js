@@ -1,9 +1,9 @@
+// @flow
 import { getWeb3 } from './web3jsPromises'
 
-const BigNumber = require('bignumber.js')
-
+// TODO: move this to web3jsPromises.js
 export default async function sendEtherToContract (
-  contract: Object,
+  contract: Object, // TODO: not used
   contractAddress: String,
   transactionValue: String,
   account: Object
@@ -25,16 +25,11 @@ export default async function sendEtherToContract (
   console.log(account)
   */
 
-  const { abi } = contract
-  const contractInstance = new web3.eth.Contract(abi, contractAddress)
-
   const web3Account = await web3.eth.personal.importRawKey(account.privateKey, 'password1234')
   await web3.eth.personal.unlockAccount(web3Account, 'password1234')
-  console.log(`web3Account: ${web3Account}`)
 
-  return new Promise(function (resolve, reject) {
-
-    const send = web3.eth.sendTransaction({
+  return new Promise((resolve, reject) => {
+    web3.eth.sendTransaction({
       from: web3Account,
       to: contractAddress,
       value: transactionValue_inWei,

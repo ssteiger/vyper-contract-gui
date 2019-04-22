@@ -1,3 +1,4 @@
+// @flow
 const promiseDbInsert = (Database, data) => {
   return new Promise(resolve => {
     Database.insert(data, (err, newDocs) => {

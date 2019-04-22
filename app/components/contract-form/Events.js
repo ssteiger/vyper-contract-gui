@@ -1,26 +1,27 @@
 // @flow
 import React, { Component } from 'react'
-import { List, Input, Typography } from 'antd'
+import { List, Typography } from 'antd'
 
 // TODO:
 // type Props = {}
 
+// TODO: implement this
 export default class Events extends Component<Props> {
   render() {
     const { Text } = Typography
 
-    function description(a) {
-      let description = ''
-      a.inputs.forEach(function (input, key) {
-        description += input.name + ': ' + input.type
+    const description = (a) => {
+      let descriptionString = ''
+      a.inputs.forEach((input, key) => {
+        descriptionString += `${input.name}: ${input.type}`
         if (key !== a.inputs.length-1) {
-          description += ', '
+          descriptionString += ', '
         }
       })
-      return ' (' + description + ')'
+      return ` (${descriptionString})`
     }
 
-    const { abi } = this.props.file
+    const { file: { abi } } = this.props
 
     return (
       <React.Fragment>
@@ -34,10 +35,10 @@ export default class Events extends Component<Props> {
             style={{ backgroundColor:'#fff' }}
           >
           {
-            abi.map(function (a, key) {
-              if (a.type == 'event') {
+            abi.map((a, key) => {
+              if (a.type === 'event') {
                 return (
-                  <List.Item key={`item-${key}`}>
+                  <List.Item key={`item-${a.name}`}>
                     {a.name}: {description(a)}
                   </List.Item>
                 )
