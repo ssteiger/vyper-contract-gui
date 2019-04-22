@@ -49,9 +49,4 @@ main.js.map
 
 .idea
 npm-debug.log.*
-
-# Database
-datastore/datafile.json
-
-# git submodules
-vyper
+.*.dockerfile

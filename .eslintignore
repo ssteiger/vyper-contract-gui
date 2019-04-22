@@ -49,9 +49,8 @@ main.js.map
 
 .idea
 npm-debug.log.*
+__snapshots__
 
-# Database
-datastore/datafile.json
-
-# git submodules
-vyper
+# Package.json
+package.json
+.travis.yml
