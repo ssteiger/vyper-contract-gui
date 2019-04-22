@@ -40,6 +40,6 @@ $ yarn run dev
 ![Screenshot03](./app/static/screenshots/03.png?raw=true "Screenshot03")
 ![Screenshot04](./app/static/screenshots/04.png?raw=true "Screenshot04")
 
-# Private Notes:
+### notes:
 * [nedb update/delete](https://stackoverflow.com/questions/32038709/nedb-method-update-and-delete-creates-a-new-entry-instead-updating-existing-one)
 * Use `web3` version `1.0.0-beta.37`!
