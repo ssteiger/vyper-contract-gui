@@ -67,7 +67,8 @@
             "package.json"
         ],
         "dmg": {
-            "contents": [{
+            "contents": [
+                {
                     "x": 130,
                     "y": 220
                 },

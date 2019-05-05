@@ -2,17 +2,24 @@
  * @NOTE: Prepend a `~` to css file paths that are in your node_modules
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
-@import "~@fortawesome/fontawesome-free/css/all.css";
+
+@import '~@fortawesome/fontawesome-free/css/all.css';
 @import '~antd/dist/antd.css';
 
 /* remove Safari/Chrome textinput/textarea glow */
-textarea, select, input, button {
-  outline:none;
-  box-shadow:none!important;
+
+textarea,
+select,
+input,
+button {
+  outline: none;
+  box-shadow: none !important;
 }
+
 /* remove glow from ant-select */
+
 .ant-select-focused .ant-select-selection,
 .ant-select-selection:focus,
 .ant-select-selection:active {
-  box-shadow:none!important;
+  box-shadow: none !important;
 }
