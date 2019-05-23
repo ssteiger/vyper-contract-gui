@@ -51,6 +51,7 @@ main.js.map
 npm-debug.log.*
 
 # Database
+datastore/settings.json
 datastore/datafile.json
 
 # git submodules
