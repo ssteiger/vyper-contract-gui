@@ -12,24 +12,7 @@ export default async function sendEtherToContract (
 
   const transactionValue_inWei = web3.utils.toWei(transactionValue)
 
-  /*
-  console.log('contract:')
-  console.log(contract)
-  console.log('contractAddress:')
-  console.log(contractAddress)
-  console.log('transactionValue [ETH]:')
-  console.log(transactionValue)
-  console.log('transactionValue [wei]:')
-  console.log(transactionValue_inWei)
-  console.log('account:')
-  console.log(account)
-  */
-
-  //const web3Account = await web3.eth.personal.importRawKey(account.privateKey, 'password1234')
-  //await web3.eth.personal.unlockAccount(web3Account, 'password1234')
-
   var tx = {
-    //from: web3Account,
     to: contractAddress,
     value: transactionValue_inWei,
     gas: 300000,

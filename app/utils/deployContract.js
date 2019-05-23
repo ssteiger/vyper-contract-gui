@@ -10,14 +10,6 @@ export default async function deployContract (contract: Object, args: Array, acc
   let argments = Object.values(args)
   // remove "" quotes
   argments = argments.filter((a) => a !== '' )
-  /*
-  console.log('contract:')
-  console.log(contract)
-  console.log('args:')
-  console.log(args)
-  console.log('account:')
-  console.log(account)
-  */
 
   const { abi, bytecode } = contract
 
