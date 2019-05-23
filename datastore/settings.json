@@ -1,3 +1,4 @@
-{"_id":"accounts","accounts":[{"address":"0x954e72fdc51Cf919203067406fB337Ed4bDC8CdA","privateKey":"0xcbf13a21140d00f1c0b91ed20e81ba8817ff814053be4389fad281a90b117d33"}]}
-{"rpcServer":"http://127.0.0.1:7545","compilerUrl":"http://127.0.0.1:8000/compile","_id":"connections"}
-{"rpcServer":"http://127.0.0.1:7545","compilerUrl":"http://127.0.0.1:8000/compile","_id":"connections"}
+{"_id":"accounts","accounts":[{"address":"0x21A55041a73814cD92D96530A2Fa8AAF6a356fB7","privateKey":"0x6EFD22BFCAC9F806561386FE1AC4938044104331185477765C802A7A82DA7FA1"}]}
+{"rpcServer":"https://kovan.infura.io/v3/46777b8b710949938a9d451b26b915a1","compilerUrl":"http://127.0.0.1:8000/compile","_id":"connections"}
+{"rpcServer":"https://kovan.infura.io/v3/46777b8b710949938a9d451b26b915a1","compilerUrl":"http://127.0.0.1:8000/compile","_id":"connections"}
+{"_id":"accounts","accounts":[{"address":"0x21A55041a73814cD92D96530A2Fa8AAF6a356fB7","privateKey":"0x6EFD22BFCAC9F806561386FE1AC4938044104331185477765C802A7A82DA7FA1"},{"address":"0x7f88a336f9E99a09d23b84873635091E019780A5","privateKey":"0xeea87fac0df44e451b1740abddb062a14659cbbb84189760cbc15062f1ad4379"}]}

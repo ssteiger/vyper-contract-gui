@@ -2,7 +2,7 @@
 import { getWeb3 } from './web3jsPromises'
 
 // TODO: no errors are caught here
-//       -> promisifiy and reject() ?
+//       -> promisifiy and reject()
 export default async function deployContract (contract: Object, args: Array, account: Object) {
   const web3 = await getWeb3()
   console.log(`web3: ${web3.version}`)
@@ -15,16 +15,23 @@ export default async function deployContract (contract: Object, args: Array, acc
 
   const myContract = new web3.eth.Contract(abi)
 
-  const tx = await myContract.deploy({
+  const tx_builder = await myContract.deploy({
     data: bytecode,
     arguments: argments,
   })
 
-  const gasEstimate = await tx.estimateGas()
+  let encoded_tx = tx_builder.encodeABI()
 
-  tx.gas = gasEstimate + 3000
+  const gasEstimate = await tx_builder.estimateGas()
+
+  const tx = {
+    gas: gasEstimate + 500000, // TODO: is there a better way to calculate this?
+    from: account.address,
+    data: encoded_tx,
+  }
 
   const signedTransaction = await web3.eth.accounts.signTransaction(tx, account.privateKey)
+
   const receipt = await web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
   return receipt
 }

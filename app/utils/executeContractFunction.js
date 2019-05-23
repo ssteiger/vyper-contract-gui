@@ -24,11 +24,11 @@ export default async function executeContractFunction (
   // determine type of execution
   // -> call() for constant methods
   //    send() for state mutating methods
-  const transactionExecutionType = functionDetails.constant ? 'call' : 'send'
+  //const transactionExecutionType = functionDetails.constant ? 'call' : 'send'
 
-  let tx_builder = contractInstance.methods[functionDetails.name](...inputs)
+  const tx_builder = contractInstance.methods[functionDetails.name](...inputs)
 
-  let encoded_tx = tx_builder.encodeABI()
+  const encoded_tx = tx_builder.encodeABI()
 
   const gasEstimate = await tx_builder.estimateGas()
 

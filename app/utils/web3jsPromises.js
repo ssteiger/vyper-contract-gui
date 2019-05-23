@@ -12,9 +12,13 @@ const getWeb3 = () =>
       resolve(web3)
     } else {
       Settings.findOne({ _id: 'connections' }, (err, connections) => {
-        const { rpcServer } = connections
-        const provider = new Web3.providers.HttpProvider(rpcServer)
-        resolve(new Web3(provider))
+        if (connections) {
+          const { rpcServer } = connections
+          const provider = new Web3.providers.HttpProvider(rpcServer)
+          resolve(new Web3(provider))
+        } else {
+          reject(err)
+        }
       })
     }
   })
@@ -29,7 +33,7 @@ const web3GetAccountBalance = async (address) => {
 
 const web3GenerateNewAccounts = async (number) => {
   const web3 = await getWeb3()
-
+  await web3.eth.accounts.wallet.create(number, '54674321§3456544±±±§±±±!!!43534534534534')
   return new Promise((resolve, reject) => {
     resolve(web3.eth.accounts.wallet.create(number, '54674321§3456544±±±§±±±!!!43534534534534'))
   })

@@ -15,20 +15,26 @@ import {
   promiseDbInsert,
   promiseDbFind,
 
-  web3GenerateNewAccounts,
+  getWeb3,
   web3GetAccountBalance,
 } from '../utils'
 
 export function* initWeb3(action) {
   try {
+    console.log('in initWeb3')
     const settings = yield call(promiseDbFind, Settings, { _id: 'accounts' })
     let accounts = []
     if (!settings[0] || settings[0].accounts.length === 0) {
-      let wallets = yield call(web3GenerateNewAccounts)
-      for (let i=0; i<wallets.length; i++) {
-        delete wallets[i].index
-        accounts.push(wallets[i])
+      const web3 = yield call(getWeb3)
+      const generateRandomAccountPromise = () => {
+        return new Promise((resolve, reject) => {
+          // TODO: create 'real' entropy
+          const entropy = '54674321§3456544±±±§±±±!!!43534534534534'
+          resolve(web3.eth.accounts.create(entropy))
+        })
       }
+      const account = yield call(generateRandomAccountPromise)
+      accounts = [account]
       // TODO: this is not correct, -> insert or update depending on which 'or' in if-condition driggered
       yield call(promiseDbInsert, Settings, { _id: 'accounts', accounts })
     } else {
