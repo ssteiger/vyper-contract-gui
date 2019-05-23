@@ -15,8 +15,8 @@ export default async function executeContractFunction (
 
   // convert object into array holding all values
   inputs = Object.values(inputs)
+  console.log(inputs)
   const transactionValue_inWei = web3.utils.toWei(transactionValue)
-
   /*
   console.log('contract:')
   console.log(contract)

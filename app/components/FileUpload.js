@@ -43,7 +43,7 @@ export default class FileUpload extends Component<Props> {
       <React.Fragment>
         <Button block onClick={toggleUploadView}>
           <Icon type='upload' />
-          upload file
+          add file
         </Button>
         <div style={{ display:showUpload ? 'block' : 'none' }} >
           <Dragger onChange={this.handleChange}>

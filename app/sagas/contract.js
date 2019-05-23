@@ -25,24 +25,23 @@ import {
 export function* deploy(action) {
   try {
     const { file, inputs, account } = action.payload
-    const deployedContract = yield call(deployContract, file, inputs, account)
-    const query_find = { _id: file._id }
-
+    const transactionReceipt = yield call(deployContract, file, inputs, account)
+    const { contractAddress } = transactionReceipt
     // TODO: hmm, it seems we can't do $push & $set in one go...
     const query_change_1 = {
-      $push: { 'deployedAt.addresses': {address: deployedContract._address} },
+      $push: { 'deployedAt.addresses': { address: contractAddress } },
     }
     const query_change_2 = {
-      $set: { 'deployedAt.selected.address': {address: deployedContract._address} },
+      $set: { 'deployedAt.selected.address': { address: contractAddress } },
     }
 
-    yield call(promiseDbUpdate, Files, query_find, query_change_1)
-    const updatedFiles = yield call(promiseDbUpdate, Files, query_find, query_change_2)
+    yield call(promiseDbUpdate, Files, { _id: file._id }, query_change_1)
+    yield call(promiseDbUpdate, Files, { _id: file._id }, query_change_2)
 
-    file.deployedAt.addresses.push({address: deployedContract._address, balance: 0})
-    file.deployedAt.selected.address = {address: deployedContract._address, balance: 0}
+    file.deployedAt.addresses.push({ address: contractAddress, balance: 0 })
+    file.deployedAt.selected.address = { address: contractAddress, balance: 0 }
 
-    message.success(`deployed contract at ${deployedContract._address}`)
+    message.success(`deployed contract at ${contractAddress}`)
     yield put({ type: SELECTED_FILE_SET, file })
     yield put({ type: FILES_FETCH_ALL })
   } catch (e) {
@@ -88,8 +87,8 @@ export function* setSelectedAddress(action) {
     let query_change = {
       $set: { 'deployedAt.selected': { address } }
     }
-    const updatedFiles = yield call(promiseDbUpdate, Files, query_find, query_change)
-    file.deployedAt.selected = { address: address }
+    yield call(promiseDbUpdate, Files, query_find, query_change)
+    file.deployedAt.selected = { address }
     yield put({ type: SELECTED_FILE_SET, file })
     yield put({ type: FILES_FETCH_ALL })
   } catch (e) {
@@ -111,7 +110,7 @@ export function* loadContractBalances(action) {
     }
     for (let i=0; i<file.deployedAt.addresses.length; i++) {
       if (file.deployedAt.addresses[i]) {
-        let balance = yield call(getAccountBalancePromise, file.deployedAt.addresses[i].address)
+        const balance = yield call(getAccountBalancePromise, file.deployedAt.addresses[i].address)
         file.deployedAt.addresses[i].balance = balance
       }
     }
