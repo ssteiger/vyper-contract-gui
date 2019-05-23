@@ -25,16 +25,20 @@ export default async function sendEtherToContract (
   console.log(account)
   */
 
-  const web3Account = await web3.eth.personal.importRawKey(account.privateKey, 'password1234')
-  await web3.eth.personal.unlockAccount(web3Account, 'password1234')
+  //const web3Account = await web3.eth.personal.importRawKey(account.privateKey, 'password1234')
+  //await web3.eth.personal.unlockAccount(web3Account, 'password1234')
+
+  var tx = {
+    //from: web3Account,
+    to: contractAddress,
+    value: transactionValue_inWei,
+    gas: 300000,
+  }
+
+  const signedTransaction = await web3.eth.accounts.signTransaction(tx, account.privateKey)
 
   return new Promise((resolve, reject) => {
-    web3.eth.sendTransaction({
-      from: web3Account,
-      to: contractAddress,
-      value: transactionValue_inWei,
-      gas: 300000,
-    }, (error, result) => {
+    web3.eth.sendSignedTransaction(signedTransaction.rawTransaction, (error, result) => {
       if (error) {
         console.error(error)
         reject(error)
@@ -43,6 +47,5 @@ export default async function sendEtherToContract (
         resolve(result)
       }
     })
-
   }) // Promise
 }

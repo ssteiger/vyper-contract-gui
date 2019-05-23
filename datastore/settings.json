@@ -1,2 +1,3 @@
 {"_id":"accounts","accounts":[{"address":"0x954e72fdc51Cf919203067406fB337Ed4bDC8CdA","privateKey":"0xcbf13a21140d00f1c0b91ed20e81ba8817ff814053be4389fad281a90b117d33"}]}
 {"rpcServer":"http://127.0.0.1:7545","compilerUrl":"http://127.0.0.1:8000/compile","_id":"connections"}
+{"rpcServer":"http://127.0.0.1:7545","compilerUrl":"http://127.0.0.1:8000/compile","_id":"connections"}
