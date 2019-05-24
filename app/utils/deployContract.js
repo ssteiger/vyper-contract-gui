@@ -1,37 +1,59 @@
 // @flow
 import { getWeb3 } from './web3jsPromises'
 
-// TODO: no errors are caught here
-//       -> promisifiy and reject()
-export default async function deployContract (contract: Object, args: Array, account: Object) {
+export default async function deployContract (contract: Object, args: Array<String>, account: Object) {
   const web3 = await getWeb3()
   console.log(`web3: ${web3.version}`)
   // convert object into array with all values
-  let argments = Object.values(args)
+  let argmnts = Object.values(args)
   // remove "" quotes
-  argments = argments.filter((a) => a !== '' )
+  argmnts = argmnts.filter((a) => a !== '' )
 
-  const { abi, bytecode } = contract
+  const { abi, bytecode, bytecode_runtime } = contract
 
-  const myContract = new web3.eth.Contract(abi)
+  // Contract object
+  const contractInstance = new web3.eth.Contract(abi)
 
-  const tx_builder = await myContract.deploy({
+  const gasPrice = await web3.eth.gasPrice
+
+  // Get contract data
+  const contractData = contractInstance.deploy({
     data: bytecode,
-    arguments: argments,
   })
 
-  let encoded_tx = tx_builder.encodeABI()
+  //estimate gas and log to console
+  const gasLimit = await contractInstance.deploy({
+    data: bytecode,
+    arguments: argmnts,
+  }).estimateGas()
 
-  const gasEstimate = await tx_builder.estimateGas()
-
-  const tx = {
-    gas: gasEstimate + 500000, // TODO: is there a better way to calculate this?
+  const rawTx = {
+    //nonce: nonceHex,
+    gasPrice: gasPrice,
+    gasLimit: gasLimit + 30000,
+    data: contractData.encodeABI(),
     from: account.address,
-    data: encoded_tx,
-  }
+    //chainId:web3.utils.toHex(3)
+  };
 
-  const signedTransaction = await web3.eth.accounts.signTransaction(tx, account.privateKey)
-
-  const receipt = await web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
-  return receipt
+  return new Promise((resolve, reject) => {
+    web3.eth.accounts.signTransaction(rawTx, account.privateKey, (error, signedTx) => {
+      if (error) {
+        reject(error)
+      } else {
+        web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+          .on('transactionHash', (hash) => {
+            console.log(`txhash: ${hash}`)
+          })
+          .on('receipt', (receipt) => {
+            console.log(`receipt: ${receipt}`)
+            resolve(receipt)
+          })
+          .on('confirmation', (number) => {
+            console.log(`block number: ${number}`)
+          })
+          .on('error',console.log)
+      }
+    })
+  })
 }

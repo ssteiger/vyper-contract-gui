@@ -1,3 +1,3 @@
-{"_id":"connections","rpcServer":"http://127.0.0.1:7545","compilerUrl":"http://127.0.0.1:8000/compile"}
-{"_id":"connections","rpcServer":"http://127.0.0.1:7545","compilerUrl":"http://127.0.0.1:8000/compile"}
-{"_id":"accounts","accounts":[{"address":"0xfF062c5eA05C12066f4F864905723b53E010CB45","privateKey":"0xb3f3c6ce7660c1703379bf7165910c1d393245d441c582398f98d156ba81a915"}]}
+{"_id":"accounts","accounts":[{"address":"0x21A55041a73814cD92D96530A2Fa8AAF6a356fB7","privateKey":"0x6EFD22BFCAC9F806561386FE1AC4938044104331185477765C802A7A82DA7FA1"}]}
+{"rpcServer":"https://kovan.infura.io/v3/5c85dc515f3d457880ba0d36525e796b","compilerUrl":"http://127.0.0.1:8000/compile","_id":"connections"}
+{"rpcServer":"https://kovan.infura.io/v3/5c85dc515f3d457880ba0d36525e796b","compilerUrl":"http://127.0.0.1:8000/compile","_id":"connections"}
