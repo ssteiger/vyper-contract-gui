@@ -37,11 +37,11 @@ export default async function deployContract (contract: Object, args: Array<Stri
   };
 
   return new Promise((resolve, reject) => {
-    web3.eth.accounts.signTransaction(rawTx, account.privateKey, (error, signedTx) => {
+    web3.eth.accounts.signTransaction(rawTx, account.privateKey, (error, signedTransaction) => {
       if (error) {
         reject(error)
       } else {
-        web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+        web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
           .on('transactionHash', (hash) => {
             console.log(`txhash: ${hash}`)
           })
@@ -50,7 +50,7 @@ export default async function deployContract (contract: Object, args: Array<Stri
             resolve(receipt)
           })
           .on('confirmation', (number) => {
-            console.log(`block number: ${number}`)
+            //console.log(`block number: ${number}`)
           })
           .on('error',console.log)
       }
