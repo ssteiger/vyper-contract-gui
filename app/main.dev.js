@@ -10,42 +10,44 @@
  *
  * @flow
  */
-import { app, BrowserWindow } from 'electron'
-import { autoUpdater } from 'electron-updater'
-import log from 'electron-log'
-import MenuBuilder from './menu'
+import { app, BrowserWindow } from 'electron';
+import { autoUpdater } from 'electron-updater';
+import log from 'electron-log';
+import MenuBuilder from './menu';
+
+const Datastore = require('nedb');
 
 export default class AppUpdater {
   constructor() {
-    log.transports.file.level = 'info'
-    autoUpdater.logger = log
-    autoUpdater.checkForUpdatesAndNotify()
+    log.transports.file.level = 'info';
+    autoUpdater.logger = log;
+    autoUpdater.checkForUpdatesAndNotify();
   }
 }
 
-let mainWindow = null
+let mainWindow = null;
 
 if (process.env.NODE_ENV === 'production') {
-  const sourceMapSupport = require('source-map-support')
-  sourceMapSupport.install()
+  const sourceMapSupport = require('source-map-support');
+  sourceMapSupport.install();
 }
 
 if (
   process.env.NODE_ENV === 'development' ||
   process.env.DEBUG_PROD === 'true'
 ) {
-  require('electron-debug')()
+  require('electron-debug')();
 }
 
 const installExtensions = async () => {
-  const installer = require('electron-devtools-installer')
-  const forceDownload = !!process.env.UPGRADE_EXTENSIONS
-  const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS']
+  const installer = require('electron-devtools-installer');
+  const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
+  const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
 
   return Promise.all(
     extensions.map(name => installer.default(installer[name], forceDownload))
-  ).catch(console.log)
-}
+  ).catch(console.log);
+};
 
 /**
  * Add event listeners...
@@ -55,9 +57,9 @@ app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even
   // after all windows have been closed
   if (process.platform !== 'darwin') {
-    app.quit()
+    app.quit();
   }
-})
+});
 
 app.on('ready', async () => {
   if (
@@ -71,32 +73,52 @@ app.on('ready', async () => {
     show: false,
     width: 1024,
     height: 728
-  })
+  });
 
-  mainWindow.loadURL(`file://${__dirname}/app.html`)
+  mainWindow.loadURL(`file://${__dirname}/app.html`);
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
   mainWindow.webContents.on('did-finish-load', () => {
     if (!mainWindow) {
-      throw new Error('"mainWindow" is not defined')
+      throw new Error('"mainWindow" is not defined');
     }
     if (process.env.START_MINIMIZED) {
-      mainWindow.minimize()
+      mainWindow.minimize();
     } else {
-      mainWindow.show()
-      mainWindow.focus()
+      mainWindow.show();
+      mainWindow.focus();
     }
-  })
+  });
 
   mainWindow.on('closed', () => {
-    mainWindow = null
-  })
+    mainWindow = null;
+  });
 
-  const menuBuilder = new MenuBuilder(mainWindow)
-  menuBuilder.buildMenu()
+  const menuBuilder = new MenuBuilder(mainWindow);
+  menuBuilder.buildMenu();
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
-  new AppUpdater()
-})
+  new AppUpdater();
+});
+
+// create datastores
+const home = app.getPath('home');
+console.log('creating datastores at:');
+console.log(`${home}/VyperContractGUI/`);
+
+const Files = new Datastore({
+  filename: `${home}/VyperContractGUI/datafile.json`,
+  autoload: true
+});
+const Settings = new Datastore({
+  filename: `${home}/VyperContractGUI/settings.json`,
+  autoload: true
+});
+
+// put the db variables in a global variable in the main process
+const globalAny = global;
+
+globalAny.Files = Files;
+globalAny.Settings = Settings;

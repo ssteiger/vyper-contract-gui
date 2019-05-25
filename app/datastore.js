@@ -1,10 +1,7 @@
-const Datastore = require('nedb')
+import { remote } from 'electron';
 
-const Files = new Datastore({ filename: 'datastore/datafile.json', autoload: true })
-const Settings = new Datastore({ filename: 'datastore/settings.json', autoload: true })
-console.log('SUCCESS: created Datastore')
+// https://stackoverflow.com/questions/52900791/nedb-with-vue-electron-couldnt-save-local-db-file
+const Files = remote.getGlobal('Files');
+const Settings = remote.getGlobal('Settings');
 
-export {
-  Files,
-  Settings
-}
+export { Files, Settings };
