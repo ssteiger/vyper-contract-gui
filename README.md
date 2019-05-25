@@ -47,7 +47,13 @@ $ yarn run dev
 ![Vyper_Contract_GUI_03](./resources/screenshots/03.png?raw=true 'Vyper_Contract_GUI_03')
 ![Vyper_Contract_GUI_04](./resources/screenshots/04.png?raw=true 'Vyper_Contract_GUI_04')
 
-### Notes:
+## Build app for macOS, Windows and Linux
+
+```bash
+$ yarn run package-all
+```
+
+## Notes
 
 - [nedb update/delete](https://stackoverflow.com/questions/32038709/nedb-method-update-and-delete-creates-a-new-entry-instead-updating-existing-one)
 - Use `web3` version `1.0.0-beta.37`!

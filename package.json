@@ -58,7 +58,7 @@
     "main": "./app/main.prod.js",
     "build": {
         "productName": "Vyper-Contract-GUI",
-        "appId": "",
+        "appId": "vyper-contract-gui",
         "files": [
             "app/dist/",
             "app/app.html",
@@ -112,7 +112,7 @@
     },
     "author": {
         "name": "Soeren Steiger",
-        "email": "",
+        "email": "soren1@gmx.net",
         "url": "https://twitter.com/SoerenSteiger"
     },
     "license": "MIT",
