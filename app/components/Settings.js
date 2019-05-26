@@ -29,10 +29,6 @@ export default class Sidebar extends Component<Props> {
       inputValues[item.name] = item.value
     })
 
-    if (!inputValues.privateKey.startsWith('0x')) {
-      inputValues.privateKey = `0x${inputValues.privateKey}`
-    }
-
     importAccount(inputValues.privateKey)
   }
 
