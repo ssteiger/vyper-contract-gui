@@ -19,9 +19,10 @@ export default async function deployContract (contract: Object, args: Array<Stri
   // Get contract data
   const contractData = contractInstance.deploy({
     data: bytecode,
+    arguments: argmnts,
   })
 
-  //estimate gas and log to console
+  // estimate gas and log to console
   const gasLimit = await contractInstance.deploy({
     data: bytecode,
     arguments: argmnts,
@@ -34,7 +35,7 @@ export default async function deployContract (contract: Object, args: Array<Stri
     data: contractData.encodeABI(),
     from: account.address,
     //chainId:web3.utils.toHex(3)
-  };
+  }
 
   return new Promise((resolve, reject) => {
     web3.eth.accounts.signTransaction(rawTx, account.privateKey, (error, signedTransaction) => {
@@ -46,7 +47,7 @@ export default async function deployContract (contract: Object, args: Array<Stri
             console.log(`txhash: ${hash}`)
           })
           .on('receipt', (receipt) => {
-            console.log(`receipt: ${receipt}`)
+            console.log({receipt})
             resolve(receipt)
           })
           .on('confirmation', (number) => {
