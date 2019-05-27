@@ -241,6 +241,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.5.0",
         "antd": "^3.15.2",
+        "bignumber.js": "^8.1.1",
         "copy-to-clipboard": "^3.1.0",
         "devtron": "^1.4.0",
         "electron-debug": "^2.0.0",
