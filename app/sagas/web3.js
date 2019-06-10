@@ -70,6 +70,6 @@ export function* web3AccountsLoadBalances(action) {
 
 export function* web3Saga() {
   yield takeEvery(WEB3_INIT, initWeb3)
-  yield takeEvery(WEB3_ACCOUNTS_LOAD_BALANCES, web3AccountsLoadBalances)
-  yield takeEvery(SELECTED_FILE_SET, web3AccountsLoadBalances)
+  //yield takeEvery(WEB3_ACCOUNTS_LOAD_BALANCES, web3AccountsLoadBalances)
+  //yield takeEvery(SELECTED_FILE_SET, web3AccountsLoadBalances)
 }

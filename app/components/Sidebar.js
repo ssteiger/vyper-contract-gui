@@ -11,12 +11,10 @@ import vyperLogo from '../static/vyper-logo-transparent.svg'
 // type Props = {}
 
 export default class Sidebar extends Component<Props> {
-
   componentWillMount() {
     const { filesFetchAll, resizeSidebarWidth } = this.props
     filesFetchAll()
     resizeSidebarWidth(200)
-    // TODO: this is not the redux way
     this.setState({ collapsed: false })
   }
 
@@ -25,25 +23,14 @@ export default class Sidebar extends Component<Props> {
   }
 
   onClickMenuItem = (file) => {
-    const { loadContractBalances, hideSettings } = this.props
+    const { setSelectedFile, hideSettings } = this.props
 
-    loadContractBalances(file)
+    setSelectedFile(file)
     hideSettings()
-
-    // https://medium.com/@machadogj/timers-in-react-with-redux-apps-9a5a722162e8
-    // https://stackoverflow.com/questions/49971046/how-to-dispatch-actions-via-a-timer-using-redux
-    // TODO: this is not optimal, need to put this somewhere else (in its own function)
-    //       also when the selectedFile is updated (for ex. deleted,) the file data changes,
-    //       but this is not re-run
-    clearInterval(this.cron)
-    // run every x seconds
-    const seconds = 8
-    this.cron = setInterval(() => { loadContractBalances(file) }, seconds*1000)
   }
 
   render() {
     const { Sider } = Layout
-    //const SubMenu = Menu.SubMenu
 
     const { onClickMenuItem } = this
     const { files } = this.props

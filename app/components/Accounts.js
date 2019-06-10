@@ -13,7 +13,7 @@ export default class Accounts extends Component<Props> {
     const { web3AccountsLoadBalances } = this.props
     // run every x seconds
     const seconds = 8
-    this.cron = setInterval(() => {web3AccountsLoadBalances()}, seconds*1000)
+    //this.cron = setInterval(() => {web3AccountsLoadBalances()}, seconds*1000)
   }
 
   componentWillUnmount() {

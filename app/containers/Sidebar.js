@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import Sidebar from '../components/Sidebar'
 import * as SidebarActions from '../actions/sidebar'
 import { filesFetchAll } from '../actions/files'
-import { loadContractBalances } from '../actions/contractForm'
+import { setSelectedFile } from '../actions/selectedFile'
 import { hideSettings } from '../actions/settings'
 
 function mapStateToProps(state) {
@@ -20,7 +20,7 @@ function mapDispatchToProps(dispatch) {
     ...SidebarActions,
     filesFetchAll,
     hideSettings,
-    loadContractBalances: (file) => dispatch(loadContractBalances(file)),
+    setSelectedFile: (file) => dispatch(setSelectedFile(file)),
   }, dispatch)
 }
 
