@@ -6,8 +6,12 @@
 @import '~@fortawesome/fontawesome-free/css/all.css';
 @import '~antd/dist/antd.css';
 
-/* remove Safari/Chrome textinput/textarea glow */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
+/* remove Safari/Chrome textinput/textarea glow */
 textarea,
 select,
 input,
@@ -17,7 +21,6 @@ button {
 }
 
 /* remove glow from ant-select */
-
 .ant-select-focused .ant-select-selection,
 .ant-select-selection:focus,
 .ant-select-selection:active {
