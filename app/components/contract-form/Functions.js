@@ -245,7 +245,9 @@ export default class Functions extends Component<Props> {
                   {renderInputs(abiPart.inputs)}
                   {renderEthInput(abiPart)}
                   <Button block htmlType='submit'>call</Button>
-                  <Text style={{color:'#52c41a'}}>{functionCallResults[abiPart.name]}</Text>
+                  <Text style={{ color:'#52c41a', overflowWrap:'break-word' }}>
+                    {functionCallResults[abiPart.name]}
+                  </Text>
                 </Form>
               )
             }

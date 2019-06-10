@@ -9,6 +9,9 @@ export default async function deployContract (contract: Object, args: Array<Stri
   // remove "" quotes
   argmnts = argmnts.filter((a) => a !== '' )
 
+  console.log('deploying contract with: ')
+  console.log({ arguments: argmnts })
+
   const { abi, bytecode, bytecode_runtime } = contract
 
   // Contract object
