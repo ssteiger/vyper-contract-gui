@@ -8,7 +8,6 @@ import { Input, Typography } from 'antd'
 // NOTE: currently this is the main reason for the slow ui renders
 export default class CompilationFormats extends Component<Props> {
   render() {
-    const { TextArea } = Input
     const { Text } = Typography
 
     const {
