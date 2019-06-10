@@ -5,7 +5,8 @@ import {
   CONTRACT_DEPLOY,
   CONTRACT_CALL_FUNCTION,
   CONTRACT_SELECT_ADDRESS,
-  CONTRACT_LOAD_BALANCES,
+  CONTRACT_BALANCES_LOAD,
+  CONTRACT_BALANCES_SET,
   CONTRACT_SEND_ETHER,
   FUNCTION_CALL_RESULTS_UPDATE,
   SELECTED_FILE_SET,
@@ -66,7 +67,7 @@ export function* callFunction(action) {
       functionDetails,
       inputs,
       transactionValue,
-      account
+      account,
     )
     const payload = {
       result,
@@ -103,18 +104,18 @@ export function* loadContractBalances(action) {
   }
   try {
     const web3 = yield call(getWeb3)
-    function getAccountBalancePromise(address) {
+    function getAddressBalancePromise(address) {
       return new Promise(function(resolve, reject) {
         resolve(web3.eth.getBalance(address))
       })
     }
     for (let i=0; i<file.deployedAt.addresses.length; i++) {
       if (file.deployedAt.addresses[i]) {
-        const balance = yield call(getAccountBalancePromise, file.deployedAt.addresses[i].address)
+        const balance = yield call(getAddressBalancePromise, file.deployedAt.addresses[i].address)
         file.deployedAt.addresses[i].balance = balance
       }
     }
-    yield put({ type: SELECTED_FILE_SET, file })
+    yield put({ type: CONTRACT_BALANCES_SET, file })
   } catch (e) {
     console.log(e)
     message.error(e.message)
@@ -137,6 +138,6 @@ export function* contractSaga() {
   yield takeEvery(CONTRACT_DEPLOY, deploy)
   yield takeEvery(CONTRACT_CALL_FUNCTION, callFunction)
   yield takeEvery(CONTRACT_SELECT_ADDRESS, setSelectedAddress)
-  yield takeEvery(CONTRACT_LOAD_BALANCES, loadContractBalances)
+  yield takeEvery(CONTRACT_BALANCES_LOAD, loadContractBalances)
   yield takeEvery(CONTRACT_SEND_ETHER, sendEther)
 }

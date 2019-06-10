@@ -2,7 +2,7 @@
 import { connect } from 'react-redux'
 
 import Addresses from '../../components/contract-form/Addresses'
-import { selectAddress, loadContractBalances } from '../../actions/contractForm'
+import { selectAddress } from '../../actions/contractForm'
 
 function mapStateToProps(state) {
   return {

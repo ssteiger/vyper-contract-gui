@@ -29,9 +29,9 @@ export default class Functions extends Component<Props> {
         inputValues[item.name] = item.value
       }
     })
-    // console.log('submit with values:')
-    // console.log(inputValues)
+
     resetFunctionCallResults(abiFunc.name)
+
     callFunction({
       file,
       functionDetails: abiFunc,

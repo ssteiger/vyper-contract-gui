@@ -23,10 +23,22 @@ export default class Sidebar extends Component<Props> {
   }
 
   onClickMenuItem = (file) => {
-    const { setSelectedFile, hideSettings } = this.props
+    const {
+      setSelectedFile,
+      hideSettings,
+      loadContractBalances,
+    } = this.props
 
     setSelectedFile(file)
     hideSettings()
+    loadContractBalances(file)
+
+    // run every x seconds
+    const seconds = 8
+    clearInterval(this.cron)
+    this.cron = setInterval(() => {
+      loadContractBalances(file)
+    }, seconds*1000)
   }
 
   render() {

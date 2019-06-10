@@ -2,7 +2,7 @@
 import {
   CONTRACT_DEPLOY,
   CONTRACT_SELECT_ADDRESS,
-  CONTRACT_LOAD_BALANCES,
+  CONTRACT_BALANCES_LOAD,
   CONTRACT_CALL_FUNCTION,
   CONTRACT_SEND_ETHER,
 } from '../constants/actions'
@@ -21,7 +21,7 @@ const selectAddress = (file: Object, address: String) => ({
 })
 
 const loadContractBalances = (file: Object) => ({
-  type: CONTRACT_LOAD_BALANCES,
+  type: CONTRACT_BALANCES_LOAD,
   file,
 })
 

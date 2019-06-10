@@ -5,6 +5,7 @@ import {
   SELECTED_FILE_SET,
   CONTRACT_DEPLOY,
   CONTRACT_SELECT_ADDRESS,
+  CONTRACT_BALANCES_SET,
   CONTRACT_CALL_FUNCTION,
 } from '../constants/actions'
 
@@ -22,6 +23,10 @@ export default function selectedFile(state: Object = initialState, action: Actio
         ...state,
       }
     case CONTRACT_SELECT_ADDRESS:
+      return {
+        ...state,
+      }
+    case CONTRACT_BALANCES_SET:
       return {
         ...state,
       }

@@ -41,6 +41,7 @@ type Props = {
 */
 
 export default class File extends Component<Props> {
+
   render() {
     const { Content } = Layout
 

@@ -28,10 +28,6 @@ export default function web3(state: Object = initialState, action: Action) {
         ...state,
         selectedAccount: action.account,
       }
-    case WEB3_ACCOUNTS_LOAD_BALANCES:
-      return {
-        ...state,
-      }
     default:
       return {
         ...state

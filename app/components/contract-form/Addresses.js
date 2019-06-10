@@ -29,7 +29,7 @@ export default class Addresses extends Component<Props> {
     const { convertWeiToEth, handleChange, copyToClipboard } = this
     const { file } = this.props
 
-    const {deployedAt: {selected: { address: {address=''}=''  } } } = file
+    const { deployedAt: { selected: { address: { address='' }=''  } } } = file
 
     return (
       <React.Fragment>

@@ -21,7 +21,7 @@ import {
 
 export function* initWeb3(action) {
   try {
-    console.log('in initWeb3')
+    console.log('initWeb3')
     const settings = yield call(promiseDbFind, Settings, { _id: 'accounts' })
     let accounts = []
     if (!settings[0] || settings[0].accounts.length === 0) {
@@ -70,6 +70,5 @@ export function* web3AccountsLoadBalances(action) {
 
 export function* web3Saga() {
   yield takeEvery(WEB3_INIT, initWeb3)
-  //yield takeEvery(WEB3_ACCOUNTS_LOAD_BALANCES, web3AccountsLoadBalances)
-  //yield takeEvery(SELECTED_FILE_SET, web3AccountsLoadBalances)
+  yield takeEvery(WEB3_ACCOUNTS_LOAD_BALANCES, web3AccountsLoadBalances)
 }
