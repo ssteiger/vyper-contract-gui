@@ -7,21 +7,77 @@ import { Form, Input, Button, Typography, } from 'antd'
 
 export default class Functions extends Component<Props> {
 
-  renderInputs = (inputs) => {
-    if (inputs) {
-      return inputs.map((input, key) => {
-        return (
-          <React.Fragment key={`f-f-input-${key}`}>
-            {input.name}
-            <Input
-              key={`f-input-${key}`}
-              //onChange={handleChange}
-              style={{ width: '100%' }}
-              name={input.name}
-              placeholder={input.type}
-            />
-          </React.Fragment>
-        )
+  handleSubmit = (abiFunc) => (event) =>  {
+    event.preventDefault()
+    const { file, web3, resetFunctionCallResults, callFunction } = this.props
+    const formInputFields = $(event.target).find('input')
+
+    let inputValues = {}
+    let transactionValue = '0'
+    formInputFields.each((index, item) => {
+      if (item.name === 'transactionValue_CxH4') {
+        transactionValue = item.value
+      } else if (item.name.indexOf('-array-') > -1) {
+        // input is part of an array
+        let cleanName = item.name.substring(0, item.name.indexOf('-'))
+        // if got first item of array:
+        //  -> create array
+        // else
+        //  -> push
+        !inputValues[cleanName] ? inputValues[cleanName] = [item.value] : inputValues[cleanName].push(item.value)
+      } else {
+        inputValues[item.name] = item.value
+      }
+    })
+    // console.log('submit with values:')
+    // console.log(inputValues)
+    resetFunctionCallResults(abiFunc.name)
+    callFunction({
+      file,
+      functionDetails: abiFunc,
+      inputs: inputValues,
+      transactionValue,
+      account: web3.selectedAccount,
+    })
+  }
+
+  renderInputs = (functionAbi) => {
+    if (functionAbi) {
+      return functionAbi.map((input, key) => {
+        // if input is an array -> generate an input field for each element
+        if (input.type.indexOf('[') > -1 && input.type.indexOf(']') > -1) {
+          const inputArrayLength = input.type.match(/\d+/)[0]
+          const helperArray = [...Array(parseInt(inputArrayLength))]
+
+          // get input type without '[]'
+          const placeholder = input.type.substring(0, input.type.indexOf('['))
+
+          return (
+            <React.Fragment key={`constr-f-input-${key}`}>
+              {input.name}[{inputArrayLength}]
+              {helperArray.map((e, i) => {
+                return <Input
+                          key={`f-input-${input.name}-array-${i}`}
+                          style={{ width:'100%' }}
+                          name={`${input.name}-array-${i}`}
+                          placeholder={`${placeholder}(${i+1})`}
+                        />
+              })}
+            </React.Fragment>
+          )
+        } else {
+          return (
+            <React.Fragment key={`f-f-input-${key}`}>
+              {input.name}
+              <Input
+                key={`f-input-${key}`}
+                style={{ width:'100%' }}
+                name={input.name}
+                placeholder={input.type}
+              />
+            </React.Fragment>
+          )
+        }
       })
     }
   }
@@ -191,31 +247,6 @@ export default class Functions extends Component<Props> {
   }
   */
 
-  handleSubmit = (abiFunc) => (event) =>  {
-    event.preventDefault()
-    const { file, web3, resetFunctionCallResults, callFunction } = this.props
-    const formInputFields = $(event.target).find('input')
-
-    let inputValues = {}
-    let transactionValue = '0'
-    formInputFields.each((index, item) => {
-      if (item.name === 'transactionValue_CxH4') {
-        transactionValue = item.value
-      } else {
-        inputValues[item.name] = item.value
-      }
-    })
-    // console.log('submit with values:')
-    // console.log(inputValues)
-    resetFunctionCallResults(abiFunc.name)
-    callFunction({
-      file,
-      functionDetails: abiFunc,
-      inputs: inputValues,
-      transactionValue,
-      account: web3.selectedAccount,
-    })
-  }
   // TODO:
   functionCallResult = (abiFunc) => {
 

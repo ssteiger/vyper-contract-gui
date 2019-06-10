@@ -7,10 +7,10 @@ import { Form, Input, Button, Typography, } from 'antd'
 
 export default class Constructor extends Component<Props> {
 
-  handleSubmit = (e) => {
-    e.preventDefault()
+  handleSubmit = (event) => {
+    event.preventDefault()
     const { web3, file, deployContract } = this.props
-    const inputFields = $(e.target).find('input')
+    const inputFields = $(event.target).find('input')
 
     let inputs = {}
     inputFields.each((index, item) => {
