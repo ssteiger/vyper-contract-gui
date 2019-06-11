@@ -29,7 +29,7 @@ export default class Addresses extends Component<Props> {
     const { convertWeiToEth, handleChange, copyToClipboard } = this
     const { file } = this.props
 
-    const { deployedAt: { selected: { address: { address='' }=''  } } } = file
+    const { deployedAt: { selected: { address: { address='', balance=0 }='' } } } = file
 
     return (
       <React.Fragment>
@@ -39,14 +39,19 @@ export default class Addresses extends Component<Props> {
           <Select
             key='select-contract-addresses'
             style={{ width:'calc(100% - 64px)', marginBottom:'10px' }}
-            value={address}
+            value={
+              <React.Fragment>
+                { address ? <Tag color='green'>{convertWeiToEth(balance)} ETH</Tag> : null }
+                {address}
+              </React.Fragment>
+            }
             onChange={handleChange}
           >
             {
-              file.deployedAt.addresses.map((obj, index) => (
-                <Select.Option key={`address-opt-${obj.address}`} value={obj.address}>
-                  <Tag color='green'>{convertWeiToEth(obj.balance)} ETH</Tag>
-                  {obj.address}
+              file.deployedAt.addresses.map((o, index) => (
+                <Select.Option key={`address-opt-${o.address}`} value={o.address}>
+                  <Tag color='green'>{convertWeiToEth(o.balance)} ETH</Tag>
+                  {o.address}
                 </Select.Option>
               ))
             }
