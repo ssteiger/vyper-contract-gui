@@ -2,17 +2,17 @@
 
 import { spawn } from 'redux-saga/effects'
 
-import { web3Saga } from './web3'
-import { settingsSaga } from './settings'
-import { filesSaga } from './files'
-import { addFileSaga } from './fileUpload'
-import { contractSaga } from './contract'
+import web3Saga from './web3/'
+import settingsSaga from './settings/'
+import filesSaga from './files/'
+import fileSaga from './file/'
+import contractSaga from './contract/'
 
 export default function* rootSaga() {
   yield spawn(web3Saga)
   yield spawn(settingsSaga)
   yield spawn(filesSaga)
-  yield spawn(addFileSaga)
+  yield spawn(fileSaga)
   yield spawn(contractSaga)
 }
 

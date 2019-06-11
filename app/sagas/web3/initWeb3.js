@@ -1,15 +1,12 @@
-import { call, put, takeEvery } from 'redux-saga/effects'
+import { call, put } from 'redux-saga/effects'
 import { message } from 'antd'
 
 import {
-  SELECTED_FILE_SET,
-  WEB3_INIT,
   WEB3_ACCOUNTS_LOAD_ALL,
-  WEB3_ACCOUNTS_LOAD_BALANCES,
   WEB3_ACCOUNTS_SET_MAIN,
-} from '../constants/actions'
+} from '../../constants/actions'
 
-import { Settings } from '../datastore'
+import { Settings } from '../../datastore'
 
 import {
   promiseDbInsert,
@@ -17,9 +14,9 @@ import {
 
   getWeb3,
   web3GetAccountBalance,
-} from '../utils'
+} from '../../utils'
 
-export function* initWeb3(action) {
+export default function* initWeb3(action) {
   try {
     console.log('initWeb3')
     const settings = yield call(promiseDbFind, Settings, { _id: 'accounts' })
@@ -50,25 +47,4 @@ export function* initWeb3(action) {
     console.log(e)
     message.error(e.message)
   }
-}
-
-export function* web3AccountsLoadBalances(action) {
-  try {
-    const settings = yield call(promiseDbFind, Settings, { _id: 'accounts' })
-    const { accounts } = settings[0]
-
-    for (let i=0; i<accounts.length; i++) {
-      accounts[i].balance = yield call(web3GetAccountBalance, accounts[i].address)
-    }
-
-    yield put({ type: WEB3_ACCOUNTS_LOAD_ALL, accounts })
-  } catch (e) {
-    console.log(e)
-    message.error(e.message)
-  }
-}
-
-export function* web3Saga() {
-  yield takeEvery(WEB3_INIT, initWeb3)
-  yield takeEvery(WEB3_ACCOUNTS_LOAD_BALANCES, web3AccountsLoadBalances)
 }

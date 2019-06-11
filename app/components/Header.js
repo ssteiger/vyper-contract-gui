@@ -33,15 +33,15 @@ export default class MyHeader extends Component<Props> {
 
     const menu = (
       <Menu onClick={this.onClickMenu}>
-        <Menu.Item key='settings' style={{color: '#1890ff'}}>
+        <Menu.Item key='settings' style={{ color:'#1890ff' }}>
           <Icon type='setting' />
           Settings
         </Menu.Item>
-        <Menu.Item key='recompile' style={{color: '#52c41a'}}>
+        <Menu.Item key='recompile' style={{ color:'#52c41a' }}>
           <Icon type='reload' />
           Re-compile File
         </Menu.Item>
-        <Menu.Item key='delete' style={{color: '#f5222d'}}>
+        <Menu.Item key='delete' style={{ color:'#f5222d' }}>
           <Icon type='delete' />
           Remove File
         </Menu.Item>

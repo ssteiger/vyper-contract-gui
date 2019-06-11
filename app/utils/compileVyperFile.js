@@ -29,7 +29,7 @@ export default async function compileVyperFile (file: File) {
         }
       }
       // send request
-      let result = request.send(JSON.stringify({ 'code': file.content }))
+      const result = request.send(JSON.stringify({ code: file.content }))
       request.onerror = (e) => {
         console.log(e)
         message.error('XMLHttpRequest error: Are your RPC/Compiler connections healthy?')
