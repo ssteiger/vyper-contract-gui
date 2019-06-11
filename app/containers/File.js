@@ -3,14 +3,16 @@ import { connect } from 'react-redux'
 
 import File from '../components/File'
 
+import { loadContractBalances } from '../actions/contractForm'
+
 function mapStateToProps(state) {
   return {
-    ...state.selectedFile,
+    file: state.selectedFile,
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-
+  loadContractBalances: (file) => dispatch(loadContractBalances(file)),
 })
 
 export default connect(

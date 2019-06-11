@@ -11,6 +11,7 @@ import vyperLogo from '../static/vyper-logo-transparent.svg'
 // type Props = {}
 
 export default class Sidebar extends Component<Props> {
+
   componentWillMount() {
     const { filesFetchAll, resizeSidebarWidth } = this.props
     filesFetchAll()
@@ -26,19 +27,10 @@ export default class Sidebar extends Component<Props> {
     const {
       setSelectedFile,
       hideSettings,
-      loadContractBalances,
     } = this.props
 
     setSelectedFile(file)
     hideSettings()
-    loadContractBalances(file)
-
-    // run every x seconds
-    const seconds = 8
-    clearInterval(this.cron)
-    this.cron = setInterval(() => {
-      loadContractBalances(file)
-    }, seconds*1000)
   }
 
   render() {
