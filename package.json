@@ -1,7 +1,7 @@
 {
-    "name": "vyper-gontract-gui",
+    "name": "vyper-contract-gui",
     "productName": "Vyper-Contract-GUI",
-    "version": "0.0.2",
+    "version": "0.1.0",
     "description": "A simple GUI for compiling and interacting with Vyper contracts",
     "scripts": {
         "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
@@ -246,7 +246,7 @@
         "devtron": "^1.4.0",
         "electron-debug": "^2.0.0",
         "electron-log": "^2.2.17",
-        "electron-updater": "^3.2.3",
+        "electron-updater": "^4.0.0",
         "history": "^4.7.2",
         "jquery": "^3.3.1",
         "nedb": "^1.8.0",
