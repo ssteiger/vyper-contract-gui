@@ -39,18 +39,13 @@ export default class Addresses extends Component<Props> {
           <Select
             key='select-contract-addresses'
             style={{ width:'calc(100% - 64px)', marginBottom:'10px' }}
-            value={
-              <React.Fragment>
-                { address ? <Tag color='green'>{convertWeiToEth(balance)} ETH</Tag> : null }
-                {address}
-              </React.Fragment>
-            }
+            value={address}
             onChange={handleChange}
           >
             {
               file.deployedAt.addresses.map((o, index) => (
                 <Select.Option key={`address-opt-${o.address}`} value={o.address}>
-                  <Tag color='green'>{convertWeiToEth(o.balance)} ETH</Tag>
+                  <Tag color='green'>{o.balance ? convertWeiToEth(o.balance) : 0} ETH</Tag>
                   {o.address}
                 </Select.Option>
               ))

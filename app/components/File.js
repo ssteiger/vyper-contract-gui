@@ -12,7 +12,7 @@ export default class File extends Component<Props> {
   componentDidUpdate(prevProps) {
     // if the contract file changed that is displayed
     // -> update the cronJob for fetching contractBalances
-    if (prevProps.file.path !== this.props.file.path) {
+    if ( !cron || (prevProps.file.path !== this.props.file.path) ) {
       console.log('new file -> updating cron')
       const { file, loadContractBalances } = this.props
 

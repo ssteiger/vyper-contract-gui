@@ -3,7 +3,7 @@ import { getWeb3 } from './web3jsPromises'
 
 export default async function deployContract (contract: Object, args: Array<String>, account: Object) {
   const web3 = await getWeb3()
-  console.log(`web3: ${web3.version}`)
+  console.log(`using web3: ${web3.version}`)
   // convert object into array with all values
   let argmnts = Object.values(args)
   // remove "" quotes
