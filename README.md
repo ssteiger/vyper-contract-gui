@@ -23,8 +23,6 @@ $ git submodule update
 $ yarn install
 ```
 
-Note: Prerequisite is a working [installation of vyper](https://vyper.readthedocs.io/en/latest/installing-vyper.html)
-
 ## Getting started
 
 Open two terminals:
