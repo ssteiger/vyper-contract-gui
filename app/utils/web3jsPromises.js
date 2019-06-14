@@ -11,13 +11,13 @@ const getWeb3 = () =>
       web3 = new Web3(web3.currentProvider)
       resolve(web3)
     } else {
-      Settings.findOne({ _id: 'connections' }, (err, connections) => {
+      Settings.findOne({ _id: 'connections' }, (error, connections) => {
         if (connections) {
           const { rpcServer } = connections
           const provider = new Web3.providers.HttpProvider(rpcServer)
           resolve(new Web3(provider))
         } else {
-          reject(err)
+          reject(error)
         }
       })
     }

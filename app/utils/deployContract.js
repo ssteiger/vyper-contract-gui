@@ -56,7 +56,9 @@ export default async function deployContract (contract: Object, args: Array<Stri
           .on('confirmation', (number) => {
             //console.log(`block number: ${number}`)
           })
-          .on('error',console.log)
+          .on('error',(error) => {
+            reject(error)
+          })
       }
     })
   })
