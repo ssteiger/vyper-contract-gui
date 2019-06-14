@@ -2,7 +2,7 @@
 
 A simple and easy to use interface for compiling and interacting with [Vyper](https://github.com/ethereum/vyper) contracts.
 
-### Get latest release for Mac/Linux/Windows [here](https://github.com/ssteiger/Vyper-Contract-GUI/releases).
+### Get the latest release for Mac/Linux/Windows [here](https://github.com/ssteiger/Vyper-Contract-GUI/releases).
 
 ![Vyper_Contract_GUI_01](./resources/screenshots/01.png?raw=true 'Vyper_Contract_GUI_01')
 
