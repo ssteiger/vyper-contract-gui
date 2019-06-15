@@ -9,7 +9,7 @@ export default class Functions extends Component<Props> {
 
   handleSubmit = (abiFunc) => (event) =>  {
     event.preventDefault()
-    const { file, web3, resetFunctionCallResults, callFunction } = this.props
+    const { file, web3, resetFunctionCallResults, callContractFunction } = this.props
     const formInputFields = $(event.target).find('input')
 
     let inputValues = {}
@@ -32,7 +32,7 @@ export default class Functions extends Component<Props> {
 
     resetFunctionCallResults(abiFunc.name)
 
-    callFunction({
+    callContractFunction({
       file,
       functionDetails: abiFunc,
       inputs: inputValues,

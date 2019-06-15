@@ -25,7 +25,7 @@ const loadContractBalances = (file: Object) => ({
   file,
 })
 
-const callFunction = (payload: Object) => ({
+const callContractFunction = (payload: Object) => ({
   type: CONTRACT_CALL_FUNCTION,
   payload,
 })
@@ -39,6 +39,6 @@ export {
   deployContract,
   selectAddress,
   loadContractBalances,
-  callFunction,
+  callContractFunction,
   sendEther,
 }

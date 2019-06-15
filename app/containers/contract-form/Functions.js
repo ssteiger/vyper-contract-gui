@@ -2,7 +2,7 @@
 import { connect } from 'react-redux'
 
 import Functions from '../../components/contract-form/Functions'
-import { callFunction } from '../../actions/contractForm'
+import { callContractFunction } from '../../actions/contractForm'
 import { resetFunctionCallResults } from '../../actions/functionCallResults'
 
 function mapStateToProps(state) {
@@ -14,7 +14,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  callFunction: (contract) => dispatch(callFunction(contract)),
+  callContractFunction: (contract) => dispatch(callContractFunction(contract)),
   resetFunctionCallResults: (functionDetails) => dispatch(resetFunctionCallResults(functionDetails)),
 })
 

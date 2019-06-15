@@ -5,7 +5,7 @@ import { FUNCTION_CALL_RESULTS_UPDATE } from '../../constants/actions'
 
 import { executeContractFunction } from '../../utils'
 
-export default function* callFunction(action) {
+export default function* callContractFunction(action) {
   try {
     const {
       file,
