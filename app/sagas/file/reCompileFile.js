@@ -18,8 +18,6 @@ export default function* reCompileFile(action) {
   try {
     // fetch new file content
     const file = yield call(fetchFile, action.file)
-    console.log('new file content')
-    console.log({ file })
     // compile file
     const compiledFile = yield call(compileVyperFile, file)
     // save file in database
@@ -27,8 +25,6 @@ export default function* reCompileFile(action) {
     const query_change = { $set: { ...compiledFile } }
     yield call(promiseDbUpdate, Files, query_find, query_change)
     // update view
-    console.log('new compiled file')
-    console.log({ compiledFile })
     yield put({ type: FILE_SET_SELECTED, file: compiledFile })
     yield put({ type: FILES_FETCH_ALL })
     message.success('file compiled')

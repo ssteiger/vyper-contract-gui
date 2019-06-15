@@ -16,12 +16,6 @@ export default function selectedFile(state: Object = initialState, action: Actio
   switch (action.type) {
     case FILE_SET_SELECTED: {
       const { file } = action
-      console.log('in reducer FILE_SET_SELECTED')
-      console.log({file})
-      console.log({
-        ...state,
-        ...file,
-      })
       return {
         ...state,
         ...file,
