@@ -6,9 +6,10 @@ import ContractForm from '../../components/contract-form'
 import * as ContractActions from '../../actions/contractForm'
 
 function mapStateToProps(state) {
+  const { selectedFile, functionCallResults } = state
   return {
-    file: state.selectedFile,
-    functionCallResults: state.functionCallResults,
+    file: selectedFile,
+    functionCallResults,
   }
 }
 

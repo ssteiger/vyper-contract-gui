@@ -5,9 +5,10 @@ import { sendEther } from '../../actions/contractForm'
 import SendEther from '../../components/contract-form/SendEther'
 
 function mapStateToProps(state) {
+  const { selectedFile, accounts } = state
   return {
-    file: state.selectedFile,
-    web3: state.web3,
+    file: selectedFile,
+    accounts,
   }
 }
 

@@ -6,8 +6,9 @@ import { showSettings } from '../actions/settings'
 import { fileReCompile, fileRemove } from '../actions/files'
 
 function mapStateToProps(state) {
+  const { selectedFile } = state
   return {
-    file: state.selectedFile,
+    file: selectedFile,
     showSettings,
     fileReCompile,
     fileRemove,

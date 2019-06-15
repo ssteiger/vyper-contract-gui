@@ -5,9 +5,10 @@ import Addresses from '../../components/contract-form/Addresses'
 import { selectAddress } from '../../actions/contractForm'
 
 function mapStateToProps(state) {
+  const { selectedFile, accounts } = state
   return {
-    file: state.selectedFile,
-    web3: state.web3,
+    file: selectedFile,
+    accounts,
   }
 }
 

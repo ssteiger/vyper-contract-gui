@@ -9,9 +9,10 @@ import { hideSettings } from '../actions/settings'
 import { setSelectedFile } from '../actions/selectedFile'
 
 function mapStateToProps(state) {
+  const { files, selectedFile } = state
   return {
-    files: state.files,
-    selectedFile: state.selectedFile,
+    files,
+    selectedFile,
   }
 }
 

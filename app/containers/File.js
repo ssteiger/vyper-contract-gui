@@ -6,8 +6,9 @@ import File from '../components/File'
 import { loadContractBalances } from '../actions/contractForm'
 
 function mapStateToProps(state) {
+  const { selectedFile } = state
   return {
-    file: state.selectedFile,
+    file: selectedFile,
   }
 }
 

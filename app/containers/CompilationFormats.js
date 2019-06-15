@@ -4,8 +4,9 @@ import { connect } from 'react-redux'
 import CompilationFormats from '../components/CompilationFormats'
 
 function mapStateToProps(state) {
+  const { selectedFile } = state
   return {
-    ...state.selectedFile,
+    ...selectedFile,
   }
 }
 

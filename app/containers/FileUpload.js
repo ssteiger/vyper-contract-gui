@@ -7,8 +7,9 @@ import { fileUpload } from '../actions/files'
 import { toggleUploadView } from '../actions/sidebar'
 
 function mapStateToProps(state) {
+  const { sidebar } = state
   return {
-    ...state.sidebar,
+    ...sidebar,
     toggleUploadView,
     loading: false
   }

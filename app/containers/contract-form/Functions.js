@@ -6,10 +6,11 @@ import { callContractFunction } from '../../actions/contractForm'
 import { resetFunctionCallResults } from '../../actions/functionCallResults'
 
 function mapStateToProps(state) {
+  const { selectedFile, functionCallResults, accounts } = state
   return {
-    file: state.selectedFile,
-    functionCallResults: state.functionCallResults,
-    web3: state.web3,
+    file: selectedFile,
+    functionCallResults,
+    accounts,
   }
 }
 

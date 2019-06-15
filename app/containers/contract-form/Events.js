@@ -6,8 +6,9 @@ import Events from '../../components/contract-form/Events'
 import * as ContractActions from '../../actions/contractForm'
 
 function mapStateToProps(state) {
+  const { selectedFile } = state
   return {
-    file: state.selectedFile,
+    file: selectedFile,
   }
 }
 

@@ -6,9 +6,10 @@ import { initializeSettings } from '../actions/settings'
 import { initWeb3 } from '../actions/web3'
 
 function mapStateToProps(state) {
+  const { sidebar: { sidebarWidth } } = state
   return {
     ...state,
-    sidebarWidth: state.sidebar.sidebarWidth,
+    sidebarWidth,
   }
 }
 

@@ -14,9 +14,10 @@ import {
 } from '../actions/settings'
 
 function mapStateToProps(state) {
+  const { settings, accounts } = state
   return {
-    ...state.settings,
-    web3: state.web3,
+    ...settings,
+    accounts,
   }
 }
 
