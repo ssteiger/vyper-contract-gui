@@ -7,17 +7,21 @@ import { Form, InputNumber, Button, Typography, } from 'antd'
 
 export default class SendEther extends Component<Props> {
 
-  handleSubmit = (e)  => {
-    e.preventDefault()
-    const { web3, file, sendEther } = this.props
-    const inputFields = $(e.target).find('input')
+  handleSubmit = (event)  => {
+    event.preventDefault()
+    const {
+      accounts: { all: allAccounts=[], selected: selectedAccount={} },
+      file,
+      sendEther
+    } = this.props
+    const inputFields = $(event.target).find('input')
 
     let inputs = {}
     inputFields.each((index, item) => {
       inputs[item.name] = item.value
     })
     inputs.file = file
-    inputs.account = web3.selectedAccount
+    inputs.account = selectedAccount
 
     sendEther(inputs)
   }

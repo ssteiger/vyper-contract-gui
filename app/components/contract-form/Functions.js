@@ -9,7 +9,13 @@ export default class Functions extends Component<Props> {
 
   handleSubmit = (abiFunc) => (event) =>  {
     event.preventDefault()
-    const { file, web3, resetFunctionCallResults, callContractFunction } = this.props
+    const {
+      file,
+      accounts: { all: allAccounts=[], selected: selectedAccount={} },
+      resetFunctionCallResults,
+      callContractFunction,
+    } = this.props
+
     const formInputFields = $(event.target).find('input')
 
     let inputValues = {}
@@ -37,7 +43,7 @@ export default class Functions extends Component<Props> {
       functionDetails: abiFunc,
       inputs: inputValues,
       transactionValue,
-      account: web3.selectedAccount,
+      account: selectedAccount,
     })
   }
 
@@ -248,25 +254,33 @@ export default class Functions extends Component<Props> {
   */
 
   // TODO:
-  getEncodeFunctionSignature= (abiPart) => {
+  getFunctionCallResults = (abiPart) => {
     // https://web3js.readthedocs.io/en/1.0/web3-eth-abi.html#example
-    const { accounts: { all: allAccounts=[], selected: selectedAccount={} } } = this.props
-    /*
-    const encodeFunctionSignature = web3.eth.abi.encodeFunctionSignature({
-      name: abiPart.name,
-      type: abiPart.type,
-      inputs: abiPart.inputs,
-    })
-    console.log({ encodeFunctionSignature })
-    return encodeFunctionSignature
-    */
-    return abiPart
+    const {
+      file: { abi, method_identifiers },
+      //accounts: { all: allAccounts=[], selected: selectedAccount={} },
+      functionCallResults
+    } = this.props
+
+    // TODO: wow! this seems waaay to complicated
+
+    const identifierPlain = `${abiPart.name}(${abiPart.inputs.map((input, i) => `${input.type}`)})`
+
+    let identifier = method_identifiers[identifierPlain]
+
+    // weird 'method_identifiers' removes 0 values at beginning
+    while (identifier.length < 10) { // '0x' + 8
+      identifier = identifier.slice(0, 2) + '0' + identifier.slice(2)
+    }
+
+    return functionCallResults[identifier] ? functionCallResults[identifier] : ''
   }
 
   render() {
     const { Text } = Typography
-    const { file: { abi } } = this.props
+
     const { renderInputs, renderEthInput, createLabel, handleSubmit } = this
+    const { file: { abi, method_identifiers } } = this.props
     const { functionCallResults } = this.props
 
     return (
@@ -274,7 +288,6 @@ export default class Functions extends Component<Props> {
         <Text strong>functions</Text>
         {
           abi.map((abiPart, key) => {
-            console.log(abiPart)
             if (abiPart.type === 'function') {
               return (
                 <Form
@@ -289,7 +302,7 @@ export default class Functions extends Component<Props> {
                   {renderEthInput(abiPart)}
                   <Button block htmlType='submit'>call</Button>
                   <Text style={{ color:'#52c41a', overflowWrap:'break-word' }}>
-                    {functionCallResults[this.getEncodeFunctionSignature(abiPart)]}
+                    {this.getFunctionCallResults(abiPart)}
                   </Text>
                 </Form>
               )
