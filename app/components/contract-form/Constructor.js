@@ -9,7 +9,11 @@ export default class Constructor extends Component<Props> {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    const { web3, file, deployContract } = this.props
+    const {
+      accounts: { all: allAccounts=[], selected: selectedAccount={} },
+      file,
+      deployContract,
+    } = this.props
     const inputFields = $(event.target).find('input')
 
     let inputs = {}
@@ -28,7 +32,7 @@ export default class Constructor extends Component<Props> {
       }
     })
 
-    deployContract({ file, inputs, account: web3.selectedAccount })
+    deployContract({ file, inputs, account: selectedAccount })
   }
 
   renderInputs = (constructorAbi) => {

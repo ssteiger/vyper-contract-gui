@@ -22,7 +22,7 @@ export default function* generateRandomAccount(action) {
     }
     const account = yield call(generateRandomAccountPromise)
     const query_find = { _id: 'accounts' }
-    const query_update = { $push: {accounts: account} }
+    const query_update = { $push: { accounts: account } }
     yield call(promiseDbUpdate, Settings, query_find, query_update)
     yield put({ type: WEB3_INIT })
     message.success('account created')

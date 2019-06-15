@@ -39,9 +39,8 @@ export default class Sidebar extends Component<Props> {
   render() {
     const { Header, Content, } = Layout
     const { Title } = Typography
-
     const {
-      web3,
+      accounts: { all: allAccounts=[], selected: selectedAccount={} },
       sidebarWidth,
       rpcServer,
       compilerUrl,
@@ -105,7 +104,7 @@ export default class Sidebar extends Component<Props> {
             style={{ backgroundColor:'#fff', marginTop:'100px' }}
           >
           {
-            web3.accounts.map((account, key) => {
+            allAccounts.map((account, key) => {
               return (
                 <List.Item key={`item-${key}`} actions={[<a onClick={() => {removeAccount(account)}}>remove</a>]}>
                   <List.Item.Meta

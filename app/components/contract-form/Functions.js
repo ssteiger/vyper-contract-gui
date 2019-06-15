@@ -248,8 +248,19 @@ export default class Functions extends Component<Props> {
   */
 
   // TODO:
-  functionCallResult = (abiFunc) => {
-
+  getEncodeFunctionSignature= (abiPart) => {
+    // https://web3js.readthedocs.io/en/1.0/web3-eth-abi.html#example
+    const { accounts: { all: allAccounts=[], selected: selectedAccount={} } } = this.props
+    /*
+    const encodeFunctionSignature = web3.eth.abi.encodeFunctionSignature({
+      name: abiPart.name,
+      type: abiPart.type,
+      inputs: abiPart.inputs,
+    })
+    console.log({ encodeFunctionSignature })
+    return encodeFunctionSignature
+    */
+    return abiPart
   }
 
   render() {
@@ -263,6 +274,7 @@ export default class Functions extends Component<Props> {
         <Text strong>functions</Text>
         {
           abi.map((abiPart, key) => {
+            console.log(abiPart)
             if (abiPart.type === 'function') {
               return (
                 <Form
@@ -277,7 +289,7 @@ export default class Functions extends Component<Props> {
                   {renderEthInput(abiPart)}
                   <Button block htmlType='submit'>call</Button>
                   <Text style={{ color:'#52c41a', overflowWrap:'break-word' }}>
-                    {functionCallResults[abiPart.name]}
+                    {functionCallResults[this.getEncodeFunctionSignature(abiPart)]}
                   </Text>
                 </Form>
               )

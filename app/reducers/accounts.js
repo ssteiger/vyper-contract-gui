@@ -2,31 +2,27 @@
 import type { Action } from './types'
 
 import {
-  WEB3_INIT,
   WEB3_ACCOUNTS_LOAD_ALL,
   WEB3_ACCOUNTS_SET_MAIN,
   WEB3_ACCOUNTS_LOAD_BALANCES,
 } from '../constants/actions'
 
 const initialState = {
-  accounts: [],
+  all: [],
+  selected: {},
 }
 
-export default function web3(state: Object = initialState, action: Action) {
+export default function accounts(state: Object = initialState, action: Action) {
   switch (action.type) {
-    case WEB3_INIT:
-      return {
-        ...state
-      }
     case WEB3_ACCOUNTS_LOAD_ALL:
       return {
         ...state,
-        accounts: action.accounts,
+        all: action.accounts,
       }
     case WEB3_ACCOUNTS_SET_MAIN:
       return {
         ...state,
-        selectedAccount: action.account,
+        selected: action.account,
       }
     default:
       return {

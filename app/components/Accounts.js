@@ -23,14 +23,18 @@ export default class Accounts extends Component<Props> {
   }
 
   handleChange = (value: Number) => {
-    const { web3, web3AccountsSetMain } = this.props
-    const account = web3.accounts.find(obj => obj.address === value)
+    const {
+      accounts: { all: allAccounts=[], selected: selectedAccount={} },
+      web3AccountsSetMain
+    } = this.props
+    const account = allAccounts.find(obj => obj.address === value)
     delete account.index
     web3AccountsSetMain(account)
   }
 
   copyToClipboard = () => {
-    const { web3: { selectedAccount: { address }='' } } = this.props
+    const {accounts: { all: allAccounts=[], selected: selectedAccount={} }} = this.props
+    const { address } = selectedAccount
     copy(address)
     message.success(`copied '${address}' to clipboard`)
   }
@@ -40,9 +44,8 @@ export default class Accounts extends Component<Props> {
 
   render() {
     const { convertWeiToEth } = this
-    const { web3 } = this.props
-    const { selectedAccount={} } = web3
-    const { address='' } = selectedAccount
+    const { accounts: { all: allAccounts=[], selected={} } } = this.props
+    const { address } = selected
 
     return (
       <React.Fragment>
@@ -55,7 +58,7 @@ export default class Accounts extends Component<Props> {
             onChange={this.handleChange}
           >
             {
-              web3.accounts.map((account, index) => (
+              allAccounts.map((account, index) => (
                 <Select.Option key={`account-opt-${account.address}`} value={account.address}>
                   <Tag color='green'>{convertWeiToEth(account.balance)} ETH</Tag>
                   {account.address}
