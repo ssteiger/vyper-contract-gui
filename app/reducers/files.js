@@ -4,12 +4,10 @@ import type { Action } from './types'
 import {
   FILES_FETCH_ALL,
   FILES_SHOW_ALL,
-  FILES_UPLOAD,
-  FILES_COMPILE,
-  FILES_RECOMPILE,
-  FILES_SAVE,
-  FILES_UPDATE,
-  FILES_REMOVE,
+  FILE_UPLOAD,
+  FILE_RECOMPILE,
+  FILE_SAVE,
+  FILE_REMOVE,
 } from '../constants/actions'
 
 const initialState = []
@@ -25,18 +23,14 @@ export default function files(state: Array = initialState, action: Action) {
       // copy array
       const files = action.files.slice(0)
       return files
-    case FILES_UPLOAD:
+    case FILE_UPLOAD:
       return newState
-    case FILES_COMPILE:
+    case FILE_RECOMPILE:
       return newState
-    case FILES_RECOMPILE:
-      return newState
-    case FILES_SAVE:
+    case FILE_SAVE:
       newState.push(action.file)
       return newState
-    case FILES_UPDATE:
-      return newState
-    case FILES_REMOVE:
+    case FILE_REMOVE:
       return newState
     default:
       return newState

@@ -2,12 +2,10 @@
 import {
   FILES_FETCH_ALL,
   FILES_SHOW_ALL,
-  FILES_UPLOAD,
-  //FILES_COMPILE,
-  FILES_RECOMPILE,
-  FILES_SAVE,
-  FILES_UPDATE,
-  FILES_REMOVE,
+  FILE_UPLOAD,
+  FILE_RECOMPILE,
+  FILE_SAVE,
+  FILE_REMOVE,
 } from '../constants/actions'
 
 const filesFetchAll = () => ({
@@ -20,26 +18,22 @@ const filesShowAll = (files: Array<Object>) => ({
 })
 
 const fileUpload = (file: Object) => ({
-  type: FILES_UPLOAD,
+  type: FILE_UPLOAD,
   file,
 })
 
 const fileReCompile = (file: Object) => ({
-  type: FILES_RECOMPILE,
+  type: FILE_RECOMPILE,
   file,
 })
 
 const fileSave = (file: Object) => ({
-  type: FILES_SAVE,
+  type: FILE_SAVE,
   file,
 })
 
-const fileUpdate = (file: Object) => ({
-  type: FILES_UPDATE,
-})
-
 const fileRemove = (file: Object) => ({
-  type: FILES_REMOVE,
+  type: FILE_REMOVE,
   file,
 })
 
@@ -49,6 +43,5 @@ export {
   fileUpload,
   fileReCompile,
   fileSave,
-  fileUpdate,
   fileRemove,
 }

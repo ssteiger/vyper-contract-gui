@@ -1,21 +1,35 @@
 import { call, put } from 'redux-saga/effects'
 import { message } from 'antd'
 
-import { FILES_COMPILE } from '../../constants/actions'
+import {
+  FILE_SET_SELECTED,
+  FILES_FETCH_ALL,
+} from '../../constants/actions'
 
 import { Files } from '../../datastore'
 
 import {
   promiseDbFind,
-  uploadVyperFile,
+  promiseDbInsert,
+  fetchFile,
+  compileVyperFile,
 } from '../../utils'
 
 export default function* uploadFile(action) {
   try {
+    // check if file exists
     const results = yield call(promiseDbFind, Files, { path: action.file.path })
     if (results.length === 0) {
-      const file = yield call(uploadVyperFile, action.file)
-      yield put({ type: FILES_COMPILE, file })
+      // fetch file content
+      const file = yield call(fetchFile, action.file)
+      // compile file
+      const compiledFile = yield call(compileVyperFile, file)
+      // save file in database
+      const newFile = yield call(promiseDbInsert, Files, compiledFile)
+      // update view
+      yield put({ type: FILE_SET_SELECTED, file: newFile })
+      yield put({ type: FILES_FETCH_ALL })
+      message.success('file saved')
     } else {
       message.error('file already added')
     }

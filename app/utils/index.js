@@ -10,7 +10,7 @@ import compileVyperFile from './compileVyperFile'
 import deployContract from './deployContract'
 import executeContractFunction from './executeContractFunction'
 import sendEtherToContract from './sendEtherToContract'
-import uploadVyperFile from './uploadVyperFile'
+import fetchFile from './fetchFile'
 
 import {
   getWeb3,
@@ -28,7 +28,7 @@ export {
   deployContract,
   executeContractFunction,
   sendEtherToContract,
-  uploadVyperFile,
+  fetchFile,
 
   getWeb3,
   web3GetAccountBalance,

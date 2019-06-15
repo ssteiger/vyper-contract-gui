@@ -1,10 +1,10 @@
 // @flow
 import {
-  SELECTED_FILE_SET,
+  FILE_SET_SELECTED,
 } from '../constants/actions'
 
 const setSelectedFile = (file: Object) => ({
-  type: SELECTED_FILE_SET,
+  type: FILE_SET_SELECTED,
   file,
 })
 

@@ -2,7 +2,7 @@
 import type { Action } from './types'
 
 import {
-  SELECTED_FILE_SET,
+  FILE_SET_SELECTED,
   CONTRACT_DEPLOY,
   CONTRACT_SHOW_NEW_ADDRESS,
   CONTRACT_SELECT_ADDRESS,
@@ -14,16 +14,24 @@ const initialState = {}
 
 export default function selectedFile(state: Object = initialState, action: Action) {
   switch (action.type) {
-    case SELECTED_FILE_SET:
+    case FILE_SET_SELECTED: {
+      const { file } = action
+      console.log('in reducer FILE_SET_SELECTED')
+      console.log({file})
+      console.log({
+        ...state,
+        ...file,
+      })
       return {
         ...state,
-        ...action.file,
+        ...file,
       }
+    }
     case CONTRACT_DEPLOY:
       return {
         ...state,
       }
-    case CONTRACT_SHOW_NEW_ADDRESS:
+    case CONTRACT_SHOW_NEW_ADDRESS: {
       const { contractAddress } = action
       const address = { address: contractAddress, balance: 0 }
       let deployedAt = {
@@ -35,6 +43,7 @@ export default function selectedFile(state: Object = initialState, action: Actio
         ...state,
         deployedAt,
       }
+    }
     case CONTRACT_SELECT_ADDRESS:
       return {
         ...state,

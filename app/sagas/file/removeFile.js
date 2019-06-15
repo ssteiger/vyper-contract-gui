@@ -3,7 +3,7 @@ import { message } from 'antd'
 
 import {
   FILES_SHOW_ALL,
-  SELECTED_FILE_SET,
+  FILE_SET_SELECTED,
 } from '../../constants/actions'
 
 import { Files } from '../../datastore'
@@ -19,7 +19,7 @@ export default function* removeFile(action) {
     yield call(promiseDbRemove, Files, query)
     const files = yield call(promiseDbFind, Files, {})
     yield put({ type: FILES_SHOW_ALL, files })
-    yield put({ type: SELECTED_FILE_SET, file: files[0] })
+    yield put({ type: FILE_SET_SELECTED, file: files[0] })
   } catch (e) {
     console.log(e)
     message.error(e.message)
