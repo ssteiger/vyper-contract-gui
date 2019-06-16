@@ -1,7 +1,7 @@
 {
     "name": "vyper-contract-gui",
     "productName": "Vyper-Contract-GUI",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "description": "A simple GUI for compiling and interacting with Vyper contracts",
     "scripts": {
         "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
