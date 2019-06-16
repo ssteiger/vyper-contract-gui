@@ -280,8 +280,7 @@ export default class Functions extends Component<Props> {
     const { Text } = Typography
 
     const { renderInputs, renderEthInput, createLabel, handleSubmit } = this
-    const { file: { abi, method_identifiers } } = this.props
-    const { functionCallResults } = this.props
+    const { file: { abi, method_identifiers }, functionCallResults } = this.props
 
     return (
       <React.Fragment>

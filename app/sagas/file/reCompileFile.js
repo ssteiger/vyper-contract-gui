@@ -19,9 +19,11 @@ export default function* reCompileFile(action) {
     // fetch new file content
     const file = yield call(fetchFile, action.file)
     // compile file
-    const compiledFile = yield call(compileVyperFile, file)
+    let compiledFile = yield call(compileVyperFile, file)
+    compiledFile = { ...compiledFile, deployedAt: { addresses: [], selected: {} } }
     // save file in database
-    const   query_find = { _id: file._id }
+    const { _id } = action.file
+    const   query_find = { _id }
     const query_change = { $set: { ...compiledFile } }
     yield call(promiseDbUpdate, Files, query_find, query_change)
     // update view
