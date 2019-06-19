@@ -51,8 +51,12 @@ export default class Functions extends Component<Props> {
     if (functionAbi) {
       return functionAbi.map((input, key) => {
         // if input is an array -> generate an input field for each element
-        if (input.type.indexOf('[') > -1 && input.type.indexOf(']') > -1) {
-          const inputArrayLength = input.type.match(/\d+/)[0]
+        if (
+          input.type.indexOf('[') > -1 &&
+          input.type.indexOf(']') > -1
+        ) {
+          // https://stackoverflow.com/questions/1493027/javascript-return-string-between-square-brackets
+          const inputArrayLength = input.type.match(/\[(.*?)\]/)[1]
           const helperArray = [...Array(parseInt(inputArrayLength))]
 
           // get input type without '[]'
